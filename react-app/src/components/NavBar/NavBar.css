@@ -1,0 +1,14 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-icon {
+  height: 20px;
+  width: 20px;
+}
+
+.search-div {
+  display: flex;
+  align-items: center;
+}
