@@ -6,8 +6,9 @@ class VideoInfo(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     video_id = db.Column(db.Integer, db.ForeignKey(
-        'videos.id'), nullable=False)
+        'videos.id', ondelete='CASCADE',),  nullable=False)
     video_path = db.Column(db.String(300), nullable=False)
     description = db.Column(db.Text, nullable=True, default='')
 
-    video = db.relationship('Video', back_populates='videos_info')
+    videos = db.relationship(
+        'Video', back_populates='videos_info', )
