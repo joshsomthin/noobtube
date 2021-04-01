@@ -5,18 +5,12 @@ import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/NavBar";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
-import { authenticate } from "./services/auth";
 
 function App() {
-  const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     (async () => {
-      const user = await authenticate();
-      if (!user.errors) {
-        setAuthenticated(true);
-      }
       setLoaded(true);
     })();
   }, []);
@@ -27,27 +21,21 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar setAuthenticated={setAuthenticated} />
+      <NavBar />
       <Switch>
         <Route path="/login" exact={true}>
-          <LoginForm
-            authenticated={authenticated}
-            setAuthenticated={setAuthenticated}
-          />
+          <LoginForm />
         </Route>
-        <Route path="/sign-up" exact={true}>
-          <SignUpForm
-            authenticated={authenticated}
-            setAuthenticated={setAuthenticated}
-          />
+        <Route path="/signup" exact={true}>
+          <SignUpForm />
         </Route>
-        <Route path="/users" exact={true} authenticated={authenticated}>
+        <Route path="/users" exact={true}>
           <UsersList />
         </Route>
-        <Route path="/users/:userId" exact={true} authenticated={authenticated}>
+        <Route path="/users/:userId" exact={true}>
           <User />
         </Route>
-        <Route path="/" exact={true} authenticated={authenticated}>
+        <Route path="/" exact={true}>
           <h1>My Home Page</h1>
         </Route>
       </Switch>

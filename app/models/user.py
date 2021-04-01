@@ -11,8 +11,10 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    channels = db.relationship('Channel', back_populates='users')
-    subscriptions = db.relationship('Subscription', back_populates='users')
+    channels = db.relationship(
+        'Channel', back_populates='user', passive_deletes=True)
+    subscriptions = db.relationship(
+        'Subscription', back_populates='users', passive_deletes=True)
 
     @property
     def password(self):

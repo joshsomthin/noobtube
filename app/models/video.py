@@ -9,11 +9,15 @@ class Video(db.Model):
     title = db.Column(db.String(50), nullable=False)
     thumbnail = db.Column(db.String(100), nullable=False)
     channel_id = db.Column(db.Integer, db.ForeignKey(
-        'channels.id'), nullable=False, )
-    game_id = db.Column(db.Integer, db.ForeignKey('games.id'), nullable=False)
+        'channels.id', ondelete='CASCADE',),  nullable=False, )
+    game_id = db.Column(db.Integer, db.ForeignKey(
+        'games.id', ondelete='CASCADE',),  nullable=False)
     views = db.Column(db.Integer, nullable=True, default=0)
     created_at = db.Column(db.Date, default=date.today(), nullable=True)
 
-    video_info = db.relationship('VideoInfo', back_populates='videos')
-    game = db.relationship('Game')
-    channel = db.relationship('Channel')
+    videos_info = db.relationship(
+        'VideoInfo', back_populates='videos', passive_deletes=True)
+    games = db.relationship(
+        'Game', back_populates='videos', )
+    channel = db.relationship(
+        'Channel', back_populates='videos', )

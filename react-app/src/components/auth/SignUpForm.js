@@ -1,8 +1,13 @@
-import React, { useState } from "react";
-import { Redirect } from 'react-router-dom';
-import { signUp } from '../../services/auth';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { signUpUser } from "../../store/session";
 
-const SignUpForm = ({authenticated, setAuthenticated}) => {
+const SignUpForm = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const stateErrors = useSelector((state) => state.errors);
+  const [errors, setErrors] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,11 +16,14 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = await signUp(username, email, password);
-      if (!user.errors) {
-        setAuthenticated(true);
+      const user = await dispatch(signUpUser(username, email, password));
+      if (user.errors) {
+        return;
+      } else {
+        history.push("/");
       }
     }
+    setErrors(["Passwords do not match"]);
   };
 
   const updateUsername = (e) => {
@@ -34,13 +42,23 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
     setRepeatPassword(e.target.value);
   };
 
-  if (authenticated) {
-    return <Redirect to="/" />;
-  }
-
+  useEffect(() => {
+    if (stateErrors) {
+      setErrors(stateErrors.auth);
+    }
+  }, [stateErrors]);
   return (
     <form onSubmit={onSignUp}>
       <div>
+        {errors ? (
+          <ul>
+            {errors.map((err) => (
+              <li>{err}</li>
+            ))}
+          </ul>
+        ) : (
+          ""
+        )}
         <label>User Name</label>
         <input
           type="text"
