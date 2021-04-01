@@ -2,10 +2,7 @@
   display: flex;
   justify-content: space-between;
 }
-.MuiAppBar-colorPrimary,
-.appbar {
-  background-color: #3cb9fc;
-}
+
 .search-icon {
   height: 20px;
   width: 20px;

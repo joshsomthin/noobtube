@@ -5,6 +5,7 @@ import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/NavBar";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
+import Home from "./components/Home";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -22,7 +23,10 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
-      <div style={{ paddingTop: "70px" }}>
+      <div
+        className="body-div"
+        style={{ paddingTop: "70px", height: "2000px", bottom: "0", top: "0" }}
+      >
         <Switch>
           <Route path="/login" exact={true}>
             <LoginForm />
@@ -37,7 +41,7 @@ function App() {
             <User />
           </Route>
           <Route path="/" exact={true}>
-            <h1>My Home Page</h1>
+            <Home />
           </Route>
         </Switch>
       </div>

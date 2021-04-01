@@ -5,9 +5,9 @@ const MenuIcon = () => {
   return (
     <div>
       <a href="/">
-        <i className="fas fa-bars"></i>
+        <i className="fas fa-bars accent"></i>
       </a>
-      <NavLink to="/" exact={true} activeClassName="active">
+      <NavLink to="/" exact={true} activeClassName="active" className="button">
         Home
       </NavLink>
     </div>
