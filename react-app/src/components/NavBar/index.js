@@ -1,41 +1,19 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import LogoutButton from "../auth/LogoutButton";
+import MenuIcon from "../MenuIcon";
+import Search from "../Search";
+import AuthCluster from "../AuthCluster";
 import "./NavBar.css";
+import { Toolbar, AppBar } from "@material-ui/core";
 
-const NavBar = ({ setAuthenticated }) => {
+const NavBar = () => {
   return (
-    <nav className="navbar">
-      <div>
-        <a href="/">
-          <i className="fas fa-bars"></i>
-        </a>
-        <NavLink to="/" exact={true} activeClassName="active">
-          Home
-        </NavLink>
-      </div>
-      <div className="search-div">
-        <input></input>
-        <button>
-          <img
-            className="search-icon"
-            src={process.env.PUBLIC_URL + "/search.jpg"}
-            alt="search"
-          />
-        </button>
-      </div>
-      <div>
-        <NavLink to="/login" exact={true} activeClassName="active">
-          Login
-        </NavLink>
-
-        <NavLink to="/signup" exact={true} activeClassName="active">
-          Sign Up
-        </NavLink>
-
-        <LogoutButton setAuthenticated={setAuthenticated} />
-      </div>
-    </nav>
+    <AppBar style={{ backgroundColor: "#3cb9fc" }} className="appbar">
+      <Toolbar className="navbar">
+        <MenuIcon />
+        <Search />
+        <AuthCluster />
+      </Toolbar>
+    </AppBar>
   );
 };
 

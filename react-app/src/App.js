@@ -22,23 +22,25 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
-      <Switch>
-        <Route path="/login" exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path="/signup" exact={true}>
-          <SignUpForm />
-        </Route>
-        <Route path="/users" exact={true}>
-          <UsersList />
-        </Route>
-        <Route path="/users/:userId" exact={true}>
-          <User />
-        </Route>
-        <Route path="/" exact={true}>
-          <h1>My Home Page</h1>
-        </Route>
-      </Switch>
+      <div style={{ paddingTop: "70px" }}>
+        <Switch>
+          <Route path="/login" exact={true}>
+            <LoginForm />
+          </Route>
+          <Route path="/signup" exact={true}>
+            <SignUpForm />
+          </Route>
+          <Route path="/users" exact={true}>
+            <UsersList />
+          </Route>
+          <Route path="/users/:userId" exact={true}>
+            <User />
+          </Route>
+          <Route path="/" exact={true}>
+            <h1>My Home Page</h1>
+          </Route>
+        </Switch>
+      </div>
     </BrowserRouter>
   );
 }
