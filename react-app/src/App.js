@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import Home from "./components/Home";
+import VideoPage from "./components/VideoPage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -39,6 +40,9 @@ function App() {
           </Route>
           <Route path="/users/:userId" exact={true}>
             <User />
+          </Route>
+          <Route path="/videos">
+            <VideoPage />
           </Route>
           <Route path="/" exact={true}>
             <Home />
