@@ -1,1 +1,19 @@
 /* TODO Add site wide styles */
+body {
+  background-color: #26262b;
+  color: white;
+}
+
+.accent {
+  color: #9d07c3;
+}
+
+.button {
+  color: white;
+}
+
+.body-div {
+  padding-top: 70px;
+  background-color: #840f8f;
+  width: 20%;
+}

@@ -9,3 +9,12 @@ class Tag(db.Model):
 
     gametags = db.relationship(
         'GameTag', back_populates='tag', passive_deletes=True)
+
+    def get_name(self):
+        return self.name
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name
+        }

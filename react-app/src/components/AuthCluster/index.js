@@ -1,18 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LogoutButton from "../auth/LogoutButton";
 import AccountCircleRoundedIcon from "@material-ui/icons/AccountCircleRounded";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import Button from "@material-ui/core/Button";
 
 const AuthCluster = () => {
   const logged = useSelector((state) => state.user.user);
+  const [accountClick, setAccountClick] = useState(null);
+
+  const handleClick = (e) => {
+    setAccountClick(e.currentTarget);
+  };
+  const handleClose = (e) => {
+    setAccountClick(null);
+  };
 
   const loggedIn = (
     <>
-      <a href="" onClick={""}>
-        <AccountCircleRoundedIcon />
-      </a>
-      <LogoutButton />
+      <Button aria-controls="profile-menu" onClick={handleClick}>
+        <AccountCircleRoundedIcon className="button" />
+      </Button>
+      <Menu
+        id="profile-menu"
+        anchorEl="accountClick"
+        keepMounted
+        open={Boolean(accountClick)}
+        onClose={handleClose}
+      >
+        <LogoutButton />
+      </Menu>
     </>
   );
 
@@ -31,7 +50,8 @@ const AuthCluster = () => {
   useEffect(() => {
     console.log(logged);
   }, [logged]);
-  return logged ? loggedOut : loggedIn;
+  return loggedIn;
+  // return logged ? loggedIn : loggedOut;
 };
 
 export default AuthCluster;

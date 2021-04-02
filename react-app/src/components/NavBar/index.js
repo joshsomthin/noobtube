@@ -7,7 +7,7 @@ import { Toolbar, AppBar } from "@material-ui/core";
 
 const NavBar = () => {
   return (
-    <AppBar style={{ backgroundColor: "#3cb9fc" }} className="appbar">
+    <AppBar style={{ backgroundColor: "#4e4e50" }} className="appbar">
       <Toolbar className="navbar">
         <MenuIcon />
         <Search />
