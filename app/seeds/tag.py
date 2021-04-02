@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 from app.models import db, Tag
 
 
@@ -7,7 +8,7 @@ def seed_tags():
     url = "https://rawg-video-games-database.p.rapidapi.com/genres"
 
     headers = {
-        'x-rapidapi-key': os.environ['RAPIDAPI_KEY'],
+        'x-rapidapi-key': os.environ.get('RAPIDAPI_KEY'),
         'x-rapidapi-host': "rawg-video-games-database.p.rapidapi.com"
     }
 

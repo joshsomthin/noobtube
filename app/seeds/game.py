@@ -1,4 +1,5 @@
 import requests
+import os
 import json
 from datetime import datetime, date
 from app.models import db, Game, GameTag, Tag
@@ -10,7 +11,7 @@ def seed_games(url="https://rawg-video-games-database.p.rapidapi.com/games"):
     genres = {genre.name: genre.id for genre in allgenres}
 
     headers = {
-        'x-rapidapi-key': 'x-rapidapi-key': os.environ['RAPIDAPI_KEY'], ,
+        'x-rapidapi-key': os.environ.get('RAPIDAPI_KEY'),
         'x-rapidapi-host': "rawg-video-games-database.p.rapidapi.com"
     }
 
