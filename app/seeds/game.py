@@ -8,10 +8,9 @@ def seed_games(url="https://rawg-video-games-database.p.rapidapi.com/games"):
 
     allgenres = Tag.query.all()
     genres = {genre.name: genre.id for genre in allgenres}
-    # url = "https://rawg-video-games-database.p.rapidapi.com/games"
 
     headers = {
-        'x-rapidapi-key': "9733bcb8f6mshbfebb4be6d63a26p1c4453jsndcf8e922a1a8",
+        'x-rapidapi-key': 'x-rapidapi-key': os.environ['RAPIDAPI_KEY'], ,
         'x-rapidapi-host': "rawg-video-games-database.p.rapidapi.com"
     }
 

@@ -7,7 +7,7 @@ def seed_tags():
     url = "https://rawg-video-games-database.p.rapidapi.com/genres"
 
     headers = {
-        'x-rapidapi-key': "9733bcb8f6mshbfebb4be6d63a26p1c4453jsndcf8e922a1a8",
+        'x-rapidapi-key': os.environ['RAPIDAPI_KEY'],
         'x-rapidapi-host': "rawg-video-games-database.p.rapidapi.com"
     }
 
