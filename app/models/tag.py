@@ -1,5 +1,13 @@
 from .db import db
 
+games_tags = db.Table(
+    'games_tags',
+    db.Column('game_id', db.Integer, db.ForeignKey(
+        'games.id', ondelete='CASCADE',)),
+    db.Column('tag_id', db.Integer, db.ForeignKey(
+        'tags.id', ondelete='CASCADE')),
+)
+
 
 class Tag(db.Model):
     __tablename__ = 'tags'
@@ -7,8 +15,11 @@ class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), nullable=False)
 
-    gametags = db.relationship(
-        'GameTag', back_populates='tag', passive_deletes=True)
+    # gametags = db.relationship(
+    #     'GameTag', back_populates='tag', passive_deletes=True)
+
+    games = db.relationship(
+        'Game', secondary='games_tags', backref='tags', lazy='dynamic')
 
     def get_name(self):
         return self.name

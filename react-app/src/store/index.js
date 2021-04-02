@@ -2,10 +2,14 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import errorsReducer from "./errors";
+import videosReducer from "./videos";
+import carouselReducer from "./carousel";
 
 const rootReducer = combineReducers({
   user: sessionReducer,
   errors: errorsReducer,
+  videos: videosReducer,
+  carousels: carouselReducer,
 });
 
 let enhancer;

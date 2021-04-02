@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: cc1bddd436d0
+Revision ID: 2d24b66df522
 Revises: 
-Create Date: 2021-04-01 17:01:22.964915
+Create Date: 2021-04-02 13:18:22.692103
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'cc1bddd436d0'
+revision = '2d24b66df522'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -45,13 +45,11 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('gametags',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('game_id', sa.Integer(), nullable=False),
-    sa.Column('tag_id', sa.Integer(), nullable=False),
+    op.create_table('games_tags',
+    sa.Column('game_id', sa.Integer(), nullable=True),
+    sa.Column('tag_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['game_id'], ['games.id'], ondelete='CASCADE'),
-    sa.ForeignKeyConstraint(['tag_id'], ['tags.id'], ondelete='CASCADE'),
-    sa.PrimaryKeyConstraint('id')
+    sa.ForeignKeyConstraint(['tag_id'], ['tags.id'], ondelete='CASCADE')
     )
     op.create_table('subscriptions',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -89,7 +87,7 @@ def downgrade():
     op.drop_table('videos_info')
     op.drop_table('videos')
     op.drop_table('subscriptions')
-    op.drop_table('gametags')
+    op.drop_table('games_tags')
     op.drop_table('channels')
     op.drop_table('users')
     op.drop_table('tags')
