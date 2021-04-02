@@ -10,9 +10,16 @@ class Game(db.Model):
 
     videos = db.relationship(
         'Video', back_populates='games', passive_deletes=True)
-    tags = db.relationship(
-        'GameTag', back_populates='games', passive_deletes=True)
+    # tags = db.relationship(
+    #     'GameTag', back_populates='games', passive_deletes=True)
 
     @property
     def get_id(self):
         return self.id
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'game': self.game,
+            'image_path': self.image_path
+        }
