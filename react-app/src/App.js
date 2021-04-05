@@ -7,6 +7,7 @@ import UsersList from "./components/UsersList";
 import User from "./components/User";
 import Home from "./components/Home";
 import VideoPage from "./components/VideoPage";
+import GameVideos from "./components/GameVideos";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -41,7 +42,10 @@ function App() {
           <Route path="/users/:userId" exact={true}>
             <User />
           </Route>
-          <Route path="/videos">
+          <Route path="/games/:gameId">
+            <GameVideos />
+          </Route>
+          <Route path="/videos/:videoId">
             <VideoPage />
           </Route>
           <Route path="/" exact={true}>

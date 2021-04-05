@@ -9,6 +9,7 @@ from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.tag_routes import tag_routes
+from .api.video_routes import video_routes
 
 from .seeds import seed_commands
 
@@ -33,6 +34,7 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(tag_routes, url_prefix='/api/tags')
+app.register_blueprint(video_routes, url_prefix='/api/videos')
 db.init_app(app)
 Migrate(app, db)
 
@@ -50,7 +52,7 @@ CORS(app)
 def https_redirect():
     if os.environ.get('FLASK_ENV') == 'production':
         if request.headers.get('X-Forwarded-Proto') == 'http':
-            url = request.url.replace('http://', 'https://', 1)
+            url = request.url.replace('https://', 'https://', 1)
             code = 301
             return redirect(url, code=code)
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCarousels } from "../../store/carousel";
 import Slider from "react-slick";
+import VideoCard from "../VideoCard";
 
 const GameCarousel = ({ id }) => {
   const dispatch = useDispatch();
@@ -23,15 +24,12 @@ const GameCarousel = ({ id }) => {
         <Slider {...settings}>
           {games[id].map((game, idx) => {
             return (
-              <div key={idx}>
-                <img
-                  width="360"
-                  height="200"
-                  style={{ objectFit: "cover" }}
-                  src={game.image_path}
-                />
-                <div>{game.game}</div>
-              </div>
+              <VideoCard
+                game={game.game}
+                link={`/games/${game.id}`}
+                idx={idx}
+                image_path={game.image_path}
+              />
             );
           })}
         </Slider>
