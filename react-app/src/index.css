@@ -1,7 +1,9 @@
 /* TODO Add site wide styles */
+
 body {
   background-color: #26262b;
   color: white;
+  font-family: "Saira Condensed", sans-serif;
 }
 
 .accent {
@@ -13,7 +15,9 @@ body {
 }
 
 .body-div {
+  position: center;
   padding-top: 70px;
-  background-color: #840f8f;
-  width: 20%;
+  margin-left: 7%;
+  margin-right: 7%;
+  height: 100%;
 }

@@ -7,7 +7,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const genres = useSelector((state) => state.videos.genres);
   const [isLoaded, setIsLoaded] = useState(false);
-  const popular = [1, 6, 12, 15, 19];
+  const popular = [1, 6, 12, 15];
 
   useEffect(() => {
     dispatch(loadGenres()).then(() => setIsLoaded(true));

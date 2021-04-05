@@ -26,7 +26,7 @@ function App() {
       <NavBar />
       <div
         className="body-div"
-        style={{ paddingTop: "70px", height: "2000px", bottom: "0", top: "0" }}
+        style={{ paddingTop: "70px", bottom: "0", top: "0" }}
       >
         <Switch>
           <Route path="/login" exact={true}>
