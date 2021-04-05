@@ -13,7 +13,9 @@ body {
 }
 
 .body-div {
+  position: center;
   padding-top: 70px;
   background-color: #840f8f;
-  width: 20%;
+  width: 100%;
+  height: 100%;
 }
