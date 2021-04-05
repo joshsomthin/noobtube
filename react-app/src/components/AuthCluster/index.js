@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import LogoutButton from "../auth/LogoutButton";
 import AccountCircleRoundedIcon from "@material-ui/icons/AccountCircleRounded";
 import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 
 const AuthCluster = () => {
@@ -50,8 +49,7 @@ const AuthCluster = () => {
   useEffect(() => {
     console.log(logged);
   }, [logged]);
-  return loggedIn;
-  // return logged ? loggedIn : loggedOut;
+  return logged ? loggedIn : loggedOut;
 };
 
 export default AuthCluster;

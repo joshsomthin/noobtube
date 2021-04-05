@@ -12,68 +12,19 @@ const VideoCard = ({
   views = null,
 }) => {
   return (
-    <>
-      <div className="video-card" style={{ width: "360px" }}>
-        <NavLink key={idx} to={link}>
-          <img
-            width={width}
-            height={height}
-            style={{ objectFit: "cover" }}
-            src={image_path}
-          />
-          <div>{game}</div>
-          {views !== null ? <div>{views} views</div> : ""}
-        </NavLink>
-      </div>
-      <div className="video-card" style={{ width: "360px" }}>
-        <NavLink key={idx} to={link}>
-          <img
-            width={width}
-            height={height}
-            style={{ objectFit: "cover" }}
-            src={image_path}
-          />
-          <div>{game}</div>
-          {views !== null ? <div>{views} views</div> : ""}
-        </NavLink>
-      </div>
-      <div className="video-card" style={{ width: "360px" }}>
-        <NavLink key={idx} to={link}>
-          <img
-            width={width}
-            height={height}
-            style={{ objectFit: "cover" }}
-            src={image_path}
-          />
-          <div>{game}</div>
-          {views !== null ? <div>{views} views</div> : ""}
-        </NavLink>
-      </div>
-      <div className="video-card" style={{ width: "360px" }}>
-        <NavLink key={idx} to={link}>
-          <img
-            width={width}
-            height={height}
-            style={{ objectFit: "cover" }}
-            src={image_path}
-          />
-          <div>{game}</div>
-          {views !== null ? <div>{views} views</div> : ""}
-        </NavLink>
-      </div>
-      <div className="video-card" style={{ width: "360px" }}>
-        <NavLink key={idx} to={link}>
-          <img
-            width={width}
-            height={height}
-            style={{ objectFit: "cover" }}
-            src={image_path}
-          />
-          <div>{game}</div>
-          {views !== null ? <div>{views} views</div> : ""}
-        </NavLink>
-      </div>
-    </>
+    <div className="video-card" style={{ width: "360px" }}>
+      <NavLink key={idx} to={link}>
+        <img
+          alt="video card"
+          width={width}
+          height={height}
+          style={{ objectFit: "cover" }}
+          src={image_path}
+        />
+        <div>{game}</div>
+        {views !== null ? <div>{views} views</div> : ""}
+      </NavLink>
+    </div>
   );
 };
 

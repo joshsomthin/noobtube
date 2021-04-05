@@ -16,8 +16,6 @@ export const loadCarousels = (id) => async (dispatch) => {
 
 const carouselReducer = (state = {}, action) => {
   let newState;
-  let obj = {};
-
   switch (action.type) {
     case ADD_CAROUSEL:
       newState = { ...state };

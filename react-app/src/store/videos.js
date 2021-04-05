@@ -20,7 +20,7 @@ export const loadVidoes = (gameId) => async (dispatch) => {
 };
 
 export const loadGenres = () => async (dispatch) => {
-  const res = await fetch("/api/tags");
+  const res = await fetch("/api/tags/");
   const data = await res.json();
   if (data.errors) throw data;
   dispatch(addGenres(data));

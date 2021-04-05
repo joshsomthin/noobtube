@@ -11,7 +11,7 @@ const GameCarousel = ({ id }) => {
 
   useEffect(() => {
     dispatch(loadCarousels(id)).then(() => setIsLoaded(true));
-  }, []);
+  }, [dispatch, id]);
 
   const settings = {
     slidesToShow: 4,

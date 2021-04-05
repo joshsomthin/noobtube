@@ -13,7 +13,7 @@ const GameVideos = () => {
 
   useEffect(() => {
     dispatch(loadVidoes(gameId)).then(() => setIsLoaded(true));
-  }, [dispatch]);
+  }, [dispatch, gameId]);
 
   return (
     isLoaded && (

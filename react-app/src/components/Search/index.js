@@ -1,16 +1,12 @@
 import React from "react";
-import SvgIcon from "@material-ui/icons";
+import SearchIcon from "@material-ui/icons/Search";
 
 const Search = () => {
   return (
     <div className="search-div">
       <input></input>
       <button>
-        <img
-          className="search-icon"
-          src={process.env.PUBLIC_URL + "/search.jpg"}
-          alt="search"
-        />
+        <SearchIcon />
       </button>
     </div>
   );

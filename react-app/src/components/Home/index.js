@@ -11,7 +11,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(loadGenres()).then(() => setIsLoaded(true));
-  }, []);
+  }, [dispatch]);
   return (
     isLoaded && (
       <>
