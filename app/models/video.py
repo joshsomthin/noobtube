@@ -21,3 +21,14 @@ class Video(db.Model):
         'Game', back_populates='videos', )
     channel = db.relationship(
         'Channel', back_populates='videos', )
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "thumbnail": self.thumbnail,
+            "channel_id": self.channel_id,
+            "game_id": self.game_id,
+            "views": self.views,
+            "created_at": self.created_at
+        }

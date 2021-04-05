@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCarousels } from "../../store/carousel";
+import { NavLink } from "react-router-dom";
 import Slider from "react-slick";
 
 const GameCarousel = ({ id }) => {
@@ -23,7 +24,7 @@ const GameCarousel = ({ id }) => {
         <Slider {...settings}>
           {games[id].map((game, idx) => {
             return (
-              <div key={idx}>
+              <NavLink key={idx} to={`/games/${game.id}`}>
                 <img
                   width="360"
                   height="200"
@@ -31,7 +32,7 @@ const GameCarousel = ({ id }) => {
                   src={game.image_path}
                 />
                 <div>{game.game}</div>
-              </div>
+              </NavLink>
             );
           })}
         </Slider>
