@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadVidoes } from "../../store/videos";
+import VideoCard from "../VideoCard";
+import "./GameVideos.css";
 
 const GameVideos = () => {
   const { gameId } = useParams();
@@ -13,7 +15,24 @@ const GameVideos = () => {
     dispatch(loadVidoes(gameId)).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  return isLoaded && <div>Games Here</div>;
+  return (
+    isLoaded && (
+      <div>
+        <div className="video-container">
+          {videos.map((video) => {
+            return (
+              <VideoCard
+                link={`/videos/${video.id}`}
+                image_path={video.thumbnail}
+                game={video.title}
+                views={video.views}
+              />
+            );
+          })}
+        </div>
+      </div>
+    )
+  );
 };
 
 export default GameVideos;

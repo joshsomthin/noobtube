@@ -45,7 +45,7 @@ function App() {
           <Route path="/games/:gameId">
             <GameVideos />
           </Route>
-          <Route path="/videos">
+          <Route path="/videos/:videoId">
             <VideoPage />
           </Route>
           <Route path="/" exact={true}>

@@ -14,7 +14,7 @@ def seed_users(username='Demo'):
 
     db.session.commit()
 
-    channel = Channel(user_id=demo.id, created_at=date.today())
+    channel = Channel(user_id=demo.id, name=username, created_at=date.today())
     db.session.add(channel)
     db.session.commit()
     return channel
