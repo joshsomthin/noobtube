@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LogoutButton from "../auth/LogoutButton";
@@ -46,9 +46,6 @@ const AuthCluster = () => {
     </div>
   );
 
-  useEffect(() => {
-    console.log(logged);
-  }, [logged]);
   return logged ? loggedIn : loggedOut;
 };
 
