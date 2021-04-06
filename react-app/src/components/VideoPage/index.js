@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import ReactPlayer from "react-player";
 import { setCurrentVideo } from "../../store/videos";
+import SubsribeButton from "../SubscribeButton";
 import "./VideoPage.css";
 
 const VideoPage = () => {
@@ -44,7 +45,7 @@ const VideoPage = () => {
               <div>{currentVideo.views} views</div>
             </div>
             <div>
-              <div>Subscribe</div>
+              <SubsribeButton />
             </div>
           </div>
         </div>
