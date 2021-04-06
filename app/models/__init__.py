@@ -5,4 +5,3 @@ from .game import Game
 from .subscribe import Subscription
 from .tag import Tag
 from .video import Video
-from .videoinfo import VideoInfo

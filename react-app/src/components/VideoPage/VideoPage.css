@@ -1,0 +1,25 @@
+.video-container {
+  position: relative;
+  padding-top: 56.25%;
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+}
+
+.sidebar {
+  margin-left: 30px;
+}
+
+.video-info {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}

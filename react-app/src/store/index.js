@@ -4,12 +4,14 @@ import sessionReducer from "./session";
 import errorsReducer from "./errors";
 import videosReducer from "./videos";
 import carouselReducer from "./carousel";
+import genresReducer from "./genres";
 
 const rootReducer = combineReducers({
   user: sessionReducer,
   errors: errorsReducer,
   videos: videosReducer,
   carousels: carouselReducer,
+  genres: genresReducer,
 });
 
 let enhancer;
