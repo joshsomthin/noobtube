@@ -1,17 +1,17 @@
-const LOAD_GENRES = "videos/LOAD_GENRES";
 const LOAD_VIDEOS = "videos/LOAD_VIDEOS";
-
-const addGenres = (genres) => ({
-  type: LOAD_GENRES,
-  genres,
-});
+const CURRENT_VIDEO = "videos/CURRENT_VIDEO";
 
 const queryVideos = (videos) => ({
   type: LOAD_VIDEOS,
   videos,
 });
 
-export const loadVidoes = (gameId) => async (dispatch) => {
+const currentVideo = (video) => ({
+  type: CURRENT_VIDEO,
+  video,
+});
+
+export const loadVideos = (gameId) => async (dispatch) => {
   const res = await fetch(`/api/videos/${gameId}`);
   const data = await res.json();
   if (data.errors) throw data;
@@ -19,30 +19,25 @@ export const loadVidoes = (gameId) => async (dispatch) => {
   return data;
 };
 
-export const loadGenres = () => async (dispatch) => {
-  const res = await fetch("/api/tags/");
+export const setCurrentVideo = (videoId) => async (dispatch) => {
+  const res = await fetch(`/api/videos/video/${videoId}`);
   const data = await res.json();
+  console.log(data);
   if (data.errors) throw data;
-  dispatch(addGenres(data));
+  dispatch(currentVideo(data.video));
   return data;
 };
 
 const videosReducer = (state = {}, action) => {
   let newState;
-  let obj = {};
   switch (action.type) {
-    case LOAD_GENRES:
-      newState = { ...state };
-      obj = {};
-      action.genres.tags.forEach((genre) => {
-        return (obj[genre.id] = genre);
-      });
-      newState.genres = obj;
-      return newState;
-
     case LOAD_VIDEOS:
       newState = { ...state };
       newState.videos = action.videos;
+      return newState;
+    case CURRENT_VIDEO:
+      newState = { ...state };
+      newState.current = action.video;
       return newState;
     default:
       return state;

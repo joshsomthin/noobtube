@@ -7,16 +7,16 @@ class Video(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50), nullable=False)
-    thumbnail = db.Column(db.String(100), nullable=False)
+    image_path = db.Column(db.String(100), nullable=False)
     channel_id = db.Column(db.Integer, db.ForeignKey(
         'channels.id', ondelete='CASCADE',),  nullable=False, )
     game_id = db.Column(db.Integer, db.ForeignKey(
         'games.id', ondelete='CASCADE',),  nullable=False)
     views = db.Column(db.Integer, nullable=True, default=0)
     created_at = db.Column(db.Date, default=date.today(), nullable=True)
+    video_path = db.Column(db.String(300), nullable=False)
+    description = db.Column(db.Text, nullable=True, default='')
 
-    videos_info = db.relationship(
-        'VideoInfo', back_populates='videos', passive_deletes=True)
     games = db.relationship(
         'Game', back_populates='videos', )
     channel = db.relationship(
@@ -26,10 +26,12 @@ class Video(db.Model):
         return {
             "id": self.id,
             "title": self.title,
-            "thumbnail": self.thumbnail,
+            "image_path": self.image_path,
             "channel_id": self.channel_id,
             "game_id": self.game_id,
             "views": self.views,
             "created_at": self.created_at,
-            "channel": self.channel.name
+            "channel": self.channel.name,
+            "video_path": self.video_path,
+            "description": self.description
         }

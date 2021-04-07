@@ -17,3 +17,10 @@ def users():
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+
+@user_routes.route('/<int:userId>/subscriptions')
+# @login_required
+def subscriptions(userId):
+    user = User.query.get(userId)
+    return user.get_subscriptions()

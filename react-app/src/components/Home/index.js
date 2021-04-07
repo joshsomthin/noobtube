@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadGenres } from "../../store/videos";
+import { loadGenres } from "../../store/genres";
 import GameCarousel from "../GameCarousel";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const genres = useSelector((state) => state.videos.genres);
+  const genres = useSelector((state) => state.genres);
   const [isLoaded, setIsLoaded] = useState(false);
   const popular = [1, 6, 12, 15];
 
@@ -18,10 +18,10 @@ const Home = () => {
         <h1>Popluar Genres</h1>
         {popular.map((el, idx) => {
           return (
-            <>
+            <div key={idx}>
               <h2>{genres[el].name}</h2>
-              <GameCarousel key={idx} id={genres[el].id} />
-            </>
+              <GameCarousel id={genres[el].id} />
+            </div>
           );
         })}
       </>
