@@ -1,10 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
+import { updateSubscriptions } from "../../store/session";
 import Button from "@material-ui/core/Button";
 import "./SubscribeButton.css";
 
-const SubscribeButton = () => {
+const SubscribeButton = ({ channelId }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const StyledButton = withStyles({
@@ -22,7 +25,10 @@ const SubscribeButton = () => {
   })(Button);
 
   const subscribe = (e) => {
-    if (user?.id) console.log("hellos");
+    if (!user?.id) {
+      return history.push("/login");
+    }
+    dispatch(updateSubscriptions(user.id, channelId));
   };
 
   return <StyledButton onClick={subscribe}>Subscribe</StyledButton>;

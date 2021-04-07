@@ -45,7 +45,7 @@ const VideoPage = () => {
               <div>{currentVideo.views} views</div>
             </div>
             <div>
-              <SubsribeButton />
+              <SubsribeButton channelId={currentVideo.channel_id} />
             </div>
           </div>
         </div>
