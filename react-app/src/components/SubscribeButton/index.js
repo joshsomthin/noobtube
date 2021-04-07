@@ -1,11 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import "./SubscribeButton.css";
 
 const SubscribeButton = () => {
-  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
   const StyledButton = withStyles({
     root: {
       background: "#9d07c3",
@@ -20,7 +21,9 @@ const SubscribeButton = () => {
     },
   })(Button);
 
-  const subscribe = (e) => {};
+  const subscribe = (e) => {
+    if (user?.id) console.log("hellos");
+  };
 
   return <StyledButton onClick={subscribe}>Subscribe</StyledButton>;
 };
