@@ -47,7 +47,7 @@ def unsubscriptions():
 
 
 @user_routes.route('<int:user_id>/subscriptions')
-# @login_required
+@login_required
 def subscriptions(user_id):
     user = User.query.get(user_id).to_dict()
     subscriptions = user['subscriptions']
