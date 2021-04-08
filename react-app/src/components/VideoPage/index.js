@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import ReactPlayer from "react-player";
-import { setCurrentVideo } from "../../store/videos";
 import SubsribeButton from "../SubscribeButton";
 import "./VideoPage.css";
 
@@ -38,14 +36,24 @@ const VideoPage = () => {
               ? defaultPlayer
               : reactPlayer}
           </div>
-          <div className="video-info">
-            <div>
-              <div>{currentVideo.title}</div>
-              <div>{currentVideo.views} views</div>
+          <div>
+            <div className="video-info">
+              <div>
+                <div>{currentVideo.title}</div>
+                <div>
+                  <span>{currentVideo.views} views</span>
+                  <span> {currentVideo.created_at}</span>
+                </div>
+              </div>
+              <div>
+                <SubsribeButton channelId={currentVideo.channel_id} />
+              </div>
             </div>
-            <div>
-              <SubsribeButton channelId={currentVideo.channel_id} />
-            </div>
+            {currentVideo.description ? (
+              <div>{currentVideo.description}</div>
+            ) : (
+              <div>Description</div>
+            )}
           </div>
         </div>
         <div className="sidebar">Hello</div>

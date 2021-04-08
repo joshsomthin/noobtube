@@ -20,7 +20,6 @@ const GameVideos = () => {
       <div>
         <div className="videocard-container">
           {videos.map((video, idx) => {
-            console.log(video);
             return (
               <VideoCard
                 key={idx}

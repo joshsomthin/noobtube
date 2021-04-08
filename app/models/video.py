@@ -22,6 +22,11 @@ class Video(db.Model):
     channel = db.relationship(
         'Channel', back_populates='videos')
 
+    def to_timedifference(self):
+        if self.created_at:
+            time_delta = date.today() - self.created_at
+            return time_delta.days
+
     def to_dict(self):
         return {
             "id": self.id,
@@ -30,7 +35,8 @@ class Video(db.Model):
             "channel_id": self.channel_id,
             "game_id": self.game_id,
             "views": self.views,
-            "created_at": self.created_at,
+            "days_since_creation": self.to_timedifference(),
+            "created_at": self.created_at.strftime("%b %d %Y", ),
             "channel": self.channel.name,
             "video_path": self.video_path,
             "description": self.description

@@ -16,7 +16,6 @@ const VideoCard = ({
 }) => {
   const dispatch = useDispatch();
   const updateVideo = async (e) => {
-    console.log(video);
     if (video) await dispatch(setCurrentVideo(video));
   };
   return (

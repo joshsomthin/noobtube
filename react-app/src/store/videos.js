@@ -20,7 +20,6 @@ export const loadVideos = (gameId) => async (dispatch) => {
 };
 
 export const setCurrentVideo = (video) => async (dispatch) => {
-  console.log(video);
   dispatch(currentVideo(video));
   return video;
 };
