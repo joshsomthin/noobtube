@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
@@ -11,7 +11,6 @@ const SubscribeButton = ({ channelId }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const alreadySubscribed = user?.subscriptions.includes(channelId);
-  const [isLoaded, setIsLoaded] = useState(false);
 
   const StyledSubscribeButton = withStyles({
     root: {
@@ -28,7 +27,7 @@ const SubscribeButton = ({ channelId }) => {
   })(Button);
   const StyledUnsubscribeButton = withStyles({
     root: {
-      background: "#9d07c3",
+      background: "#4e4e50",
       borderRadius: 3,
       border: 0,
       color: "white",

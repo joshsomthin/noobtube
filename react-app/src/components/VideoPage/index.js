@@ -7,13 +7,12 @@ import SubsribeButton from "../SubscribeButton";
 import "./VideoPage.css";
 
 const VideoPage = () => {
-  const { videoId } = useParams();
-  const dispatch = useDispatch();
   const currentVideo = useSelector((state) => state.videos.current);
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
-    dispatch(setCurrentVideo(videoId)).then(() => setIsLoaded(true));
-  }, [dispatch, videoId]);
+    if (currentVideo) setIsLoaded(true);
+  }, [currentVideo]);
 
   const reactPlayer = (
     <ReactPlayer

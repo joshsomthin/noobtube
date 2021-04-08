@@ -19,13 +19,10 @@ export const loadVideos = (gameId) => async (dispatch) => {
   return data;
 };
 
-export const setCurrentVideo = (videoId) => async (dispatch) => {
-  const res = await fetch(`/api/videos/video/${videoId}`);
-  const data = await res.json();
-  console.log(data);
-  if (data.errors) throw data;
-  dispatch(currentVideo(data.video));
-  return data;
+export const setCurrentVideo = (video) => async (dispatch) => {
+  console.log(video);
+  dispatch(currentVideo(video));
+  return video;
 };
 
 const videosReducer = (state = {}, action) => {
