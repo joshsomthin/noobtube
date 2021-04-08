@@ -12,9 +12,26 @@ const setUser = (user) => ({
   user,
 });
 
-export const updateSubscriptions = (userId, channelId) => async (dispatch) => {
+export const updateSubscribe = (userId, channelId) => async (dispatch) => {
   const res = await fetch("/api/users/subscribe", {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      channel_id: channelId,
+      user_id: userId,
+    }),
+  });
+  const data = await res.json();
+  if (data.errors) throw data;
+  await dispatch(setUser(data));
+  return data;
+};
+
+export const updateUnsubscribe = (userId, channelId) => async (dispatch) => {
+  const res = await fetch("/api/users/unsubscribe", {
+    method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },

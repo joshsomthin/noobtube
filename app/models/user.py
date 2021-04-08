@@ -37,3 +37,8 @@ class User(db.Model, UserMixin):
             "email": self.email,
             "subscriptions": [sub.to_dict() for sub in self.subscriptions]
         }
+
+    def get_unsubscription(self, channel_id):
+        subcribed = [sub for sub in self.subscriptions if
+                     sub.channel_id == channel_id]
+        return subcribed[0]

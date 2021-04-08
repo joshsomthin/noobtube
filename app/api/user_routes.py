@@ -31,3 +31,17 @@ def subscriptions():
     db.session.add(subscribe)
     db.session.commit()
     return user(data['user_id'])
+
+
+@user_routes.route('/unsubscribe', methods=['DELETE'])
+@login_required
+def unsubscriptions():
+    data = request.json
+    subscription = User.query.get(data['user_id'])
+    print('------subcription 40', subscription)
+    subscription = subscription.get_unsubscription(
+        channel_id=data['channel_id'])
+    print('--------subscription 44', subscription)
+    db.session.delete(subscription)
+    db.session.commit()
+    return user(data['user_id'])
