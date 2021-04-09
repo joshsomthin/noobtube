@@ -44,13 +44,3 @@ def unsubscriptions():
     db.session.delete(subscription)
     db.session.commit()
     return user(data['user_id'])
-
-
-@user_routes.route('<int:user_id>/subscriptions')
-@login_required
-def subscriptions(user_id):
-    user = User.query.get(user_id).to_dict()
-    subscriptions = user['subscriptions']
-    videos = Video.query.order_by(Video.created_at.desc()).filter(
-        Video.channel_id.in_(subscriptions)).all()
-    return {"subscription_videos": [video.to_dict() for video in videos]}

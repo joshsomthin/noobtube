@@ -1,5 +1,7 @@
 const LOAD_VIDEOS = "videos/LOAD_VIDEOS";
 const CURRENT_VIDEO = "videos/CURRENT_VIDEO";
+const LOAD_SUBS = "subscriptions/LOAD_SUBS";
+const LOAD_CHANNEL = "subscriptions/LOAD_CHANNEL";
 
 const queryVideos = (videos) => ({
   type: LOAD_VIDEOS,
@@ -9,6 +11,16 @@ const queryVideos = (videos) => ({
 const currentVideo = (video) => ({
   type: CURRENT_VIDEO,
   video,
+});
+
+const loadSubs = (videos) => ({
+  type: LOAD_SUBS,
+  videos,
+});
+
+const loadChannel = (videos) => ({
+  type: LOAD_CHANNEL,
+  videos,
 });
 
 export const loadVideos = (gameId) => async (dispatch) => {
@@ -24,6 +36,22 @@ export const setCurrentVideo = (video) => async (dispatch) => {
   return video;
 };
 
+export const loadSubscriptions = (userId) => async (dispatch) => {
+  const data = await fetch(`/api/videos/${userId}/subscriptions`);
+  const res = await data.json();
+  console.log(res);
+  if (!data.ok) throw data;
+  dispatch(loadSubs(res));
+  return res;
+};
+
+export const loadChannelVideos = (channelId) => async (dispatch) => {
+  const res = await fetch(`/api/videos/${channelId}/channel`);
+  const data = await res.json();
+  if (!res.ok) throw data;
+  dispatch(loadChannel(data));
+};
+
 const videosReducer = (state = {}, action) => {
   let newState;
   switch (action.type) {
@@ -34,6 +62,14 @@ const videosReducer = (state = {}, action) => {
     case CURRENT_VIDEO:
       newState = { ...state };
       newState.current = action.video;
+      return newState;
+    case LOAD_SUBS:
+      newState = { ...state };
+      newState.videos = action.videos.subscription_videos;
+      return newState;
+    case LOAD_CHANNEL:
+      newState = { ...state };
+      newState.videos = action.videos;
       return newState;
     default:
       return state;

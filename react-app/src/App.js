@@ -7,7 +7,8 @@ import UsersList from "./components/UsersList";
 import User from "./components/User";
 import Home from "./components/Home";
 import VideoPage from "./components/VideoPage";
-import GameVideos from "./components/GameVideos";
+import SubscriptionBox from "./components/SubscriptionBox";
+import GenreVideos from "./components/GenreVideos";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -43,7 +44,7 @@ function App() {
             <User />
           </Route>
           <Route path="/games/:gameId">
-            <GameVideos />
+            <GenreVideos />
           </Route>
           <Route path="/videos/:videoId">
             <VideoPage />
@@ -51,6 +52,10 @@ function App() {
           <Route path="/" exact={true}>
             <Home />
           </Route>
+          <Route path="/:userId/subscriptions">
+            <SubscriptionBox />
+          </Route>
+          <Route path="/channel/:channelId/videos">{`Welcome to the channel`}</Route>
         </Switch>
       </div>
     </BrowserRouter>
