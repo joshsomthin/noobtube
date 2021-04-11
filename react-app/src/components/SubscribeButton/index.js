@@ -10,7 +10,7 @@ const SubscribeButton = ({ channelId }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  const alreadySubscribed = user?.subscriptions.includes(channelId);
+  const alreadySubscribed = user?.subscriptions?.includes(channelId);
 
   const StyledSubscribeButton = withStyles({
     root: {
