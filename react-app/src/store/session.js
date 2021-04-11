@@ -2,7 +2,6 @@ import { login, logout, signUp } from "../services/auth";
 import { setAuthErrors } from "./errors";
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
-const GET_SUBS = "session/GET_SUBS";
 
 const removeUser = () => ({
   type: REMOVE_USER,
@@ -13,16 +12,37 @@ const setUser = (user) => ({
   user,
 });
 
-const getSubs = (subs) => ({
-  type: GET_SUBS,
-  subs,
-});
-
-export const getSubscriptions = (userId) => async (dispatch) => {
-  const res = await fetch(`api/users/${userId}/subscriptions`);
-  const data = res.json();
+export const updateSubscribe = (userId, channelId) => async (dispatch) => {
+  const res = await fetch("/api/users/subscribe", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      channel_id: channelId,
+      user_id: userId,
+    }),
+  });
+  const data = await res.json();
   if (data.errors) throw data;
-  dispatch(data.subscriptions);
+  await dispatch(setUser(data));
+  return data;
+};
+
+export const updateUnsubscribe = (userId, channelId) => async (dispatch) => {
+  const res = await fetch("/api/users/unsubscribe", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      channel_id: channelId,
+      user_id: userId,
+    }),
+  });
+  const data = await res.json();
+  if (data.errors) throw data;
+  await dispatch(setUser(data));
   return data;
 };
 

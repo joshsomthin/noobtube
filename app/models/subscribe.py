@@ -16,7 +16,4 @@ class Subscription(db.Model):
         'User', back_populates='subscriptions', )
 
     def to_dict(self):
-        return {
-            "user_id": self.user_id,
-            "channel_id": self.channel_id
-        }
+        return self.channel_id

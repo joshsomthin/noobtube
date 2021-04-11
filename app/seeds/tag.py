@@ -17,7 +17,6 @@ def seed_tags():
     json_data = json.loads(response.text)
 
     for res in json_data['results']:
-        print(res['name'])
         tag = Tag(name=res['name'])
         db.session.add(tag)
     db.session.commit()
