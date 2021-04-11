@@ -15,6 +15,7 @@ const VideoPage = () => {
   const reactPlayer = (
     <ReactPlayer
       className="react-player"
+      controls={true}
       width="100%"
       height="100%"
       url={currentVideo?.video_path}
