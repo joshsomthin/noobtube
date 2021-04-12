@@ -10,7 +10,7 @@ const LogoutButton = () => {
   };
 
   return (
-    <Button variant="text" fullWidth onClick={onLogout}>
+    <Button size="small" variant="text" fullWidth onClick={onLogout}>
       Logout
     </Button>
   );
