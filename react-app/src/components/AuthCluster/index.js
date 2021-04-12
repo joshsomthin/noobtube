@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LogoutButton from "../auth/LogoutButton";
 import AccountCircleRoundedIcon from "@material-ui/icons/AccountCircleRounded";
 import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
+import LoginModal from "../LoginModal";
+import SignupModal from "../SignupModal";
+import "./AuthCluster.css";
 
 const AuthCluster = () => {
   const logged = useSelector((state) => state.user.user);
@@ -35,14 +37,9 @@ const AuthCluster = () => {
   );
 
   const loggedOut = (
-    <div>
-      <NavLink to="/login" exact={true} activeClassName="active">
-        Login
-      </NavLink>
-
-      <NavLink to="/signup" exact={true} activeClassName="active">
-        Sign Up
-      </NavLink>
+    <div className="log">
+      <LoginModal />
+      <SignupModal />
     </div>
   );
 

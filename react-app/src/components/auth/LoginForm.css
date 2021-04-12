@@ -1,0 +1,13 @@
+.container {
+  width: 400px;
+  height: 400px;
+  background-color: #cfcfcf;
+  display: flex;
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  margin-left: -150px;
+  margin-top: -150px;
+  flex-direction: column;
+  border-radius: 10px;
+}
