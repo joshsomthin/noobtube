@@ -65,43 +65,66 @@ const SignUpForm = () => {
           ) : (
             ""
           )}
-          <label>User Name</label>
-          <input
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            type="email"
+            label="Username"
+            name="Username"
+            autoFocus
             type="text"
             name="username"
             onChange={updateUsername}
             value={username}
-          ></input>
+          />
         </div>
         <div>
-          <label>Email</label>
-          <input
-            type="text"
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            type="email"
+            label="Email Address"
             name="email"
-            onChange={updateEmail}
+            autoComplete="email"
             value={email}
-          ></input>
+            onChange={updateEmail}
+          />
         </div>
         <div>
-          <label>Password</label>
-          <input
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
             type="password"
+            label="Password"
             name="password"
-            onChange={updatePassword}
+            autoComplete="email"
             value={password}
-          ></input>
+            onChange={updatePassword}
+          />
         </div>
         <div>
-          <label>Repeat Password</label>
-          <input
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
             type="password"
-            name="repeat_password"
-            onChange={updateRepeatPassword}
+            label="Confirm Password"
+            name="password"
+            autoComplete="email"
             value={repeatPassword}
-            required={true}
-          ></input>
+            onChange={updateRepeatPassword}
+          />
         </div>
-        <button type="submit">Sign Up</button>
+        <Button type="submit" fullWidth variant="contained" color="primary">
+          Sign Up
+        </Button>
       </form>
     </div>
   );
