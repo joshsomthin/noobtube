@@ -14,13 +14,6 @@ const MenuIcon = () => {
           height="100%"
         />
       </NavLink>
-      {user ? (
-        <div>
-          <NavLink to={`/${user}/subscriptions`}>Subscriptions</NavLink>
-        </div>
-      ) : (
-        ""
-      )}
     </>
   );
 };
