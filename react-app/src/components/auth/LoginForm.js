@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button, Typography } from "@material-ui/core";
+import { TextField, Button, Typography, withStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { userLogin } from "../../store/session";
@@ -11,6 +11,14 @@ const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const StyledTextField = withStyles({
+    root: {
+      backgroundColor: "#a0a0a0",
+      opacity: "60%",
+      borderRadius: "4px",
+    },
+  })(TextField);
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -52,8 +60,8 @@ const LoginForm = () => {
           ))}
         </div>
         <div>
-          <TextField
-            variant="outlined"
+          <StyledTextField
+            variant="filled"
             margin="normal"
             required
             fullWidth
@@ -67,8 +75,8 @@ const LoginForm = () => {
           />
         </div>
         <div>
-          <TextField
-            variant="outlined"
+          <StyledTextField
+            variant="filled"
             margin="normal"
             required
             fullWidth
