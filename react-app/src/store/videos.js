@@ -58,7 +58,6 @@ export const setCurrentVideo = (video) => async (dispatch) => {
 export const loadSubscriptions = (userId) => async (dispatch) => {
   const data = await fetch(`/api/videos/${userId}/subscriptions`);
   const res = await data.json();
-  console.log(res);
   if (!data.ok) throw data;
   dispatch(loadSubs(res));
   return res;
