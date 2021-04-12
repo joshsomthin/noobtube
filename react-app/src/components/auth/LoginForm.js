@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { TextField, Button, Typography } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { userLogin } from "../../store/session";
+import "./LoginForm.css";
 
-const LoginForm = ({ authenticated, setAuthenticated }) => {
+const LoginForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [errors, setErrors] = useState([]);
@@ -29,7 +31,10 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
   };
 
   return (
-    <div style={{ display: "flex" }}>
+    <div className="container">
+      <Typography component="h1" variant="h5">
+        Sign in
+      </Typography>
       <form onSubmit={onLogin}>
         <div>
           {errors.map((error) => (
@@ -37,26 +42,38 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
           ))}
         </div>
         <div>
-          <label htmlFor="email">Email</label>
-          <input
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
             name="email"
-            type="text"
-            placeholder="Email"
+            autoComplete="email"
+            autoFocus
             value={email}
             onChange={updateEmail}
           />
         </div>
         <div>
-          <label htmlFor="password">Password</label>
-          <input
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
             name="password"
+            label="Password"
             type="password"
-            placeholder="Password"
+            id="password"
+            autoComplete="current-password"
             value={password}
             onChange={updatePassword}
           />
-          <button type="submit">Login</button>
         </div>
+        <Button type="submit" fullWidth variant="contained" color="primary">
+          Login
+        </Button>
       </form>
     </div>
   );
