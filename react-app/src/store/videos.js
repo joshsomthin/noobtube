@@ -2,6 +2,7 @@ const LOAD_VIDEOS = "videos/LOAD_VIDEOS";
 const CURRENT_VIDEO = "videos/CURRENT_VIDEO";
 const LOAD_SUBS = "subscriptions/LOAD_SUBS";
 const LOAD_CHANNEL = "subscriptions/LOAD_CHANNEL";
+const UPDATE_GENRE = "videos/UPDATE_GENRE";
 
 const queryVideos = (videos) => ({
   type: LOAD_VIDEOS,
@@ -22,6 +23,15 @@ const loadChannel = (videos) => ({
   type: LOAD_CHANNEL,
   videos,
 });
+
+const updateCurrentGenre = (genreId) => ({
+  type: UPDATE_GENRE,
+  genreId,
+});
+
+export const currentGenre = (genreId) => async (dispatch) => {
+  dispatch(updateCurrentGenre);
+};
 
 export const increaseView = (videoId) => async (dispatch) => {
   const res = await fetch(`/api/videos/${videoId}/watched`, {
@@ -79,6 +89,10 @@ const videosReducer = (state = {}, action) => {
     case LOAD_CHANNEL:
       newState = { ...state };
       newState.videos = action.videos;
+      return newState;
+    case UPDATE_GENRE:
+      newState = { ...state };
+      newState.currentGenre = action.genreId;
       return newState;
     default:
       return state;

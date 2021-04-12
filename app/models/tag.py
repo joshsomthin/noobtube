@@ -15,9 +15,6 @@ class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), nullable=False)
 
-    # gametags = db.relationship(
-    #     'GameTag', back_populates='tag', passive_deletes=True)
-
     games = db.relationship(
         'Game', secondary='games_tags', backref='tags', lazy='dynamic')
 
