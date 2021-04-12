@@ -37,7 +37,6 @@ def channel_videos(channel_id):
 
 
 @video_routes.route('<int:video_id>/watched', methods=['PUT'])
-@login_required
 def update_views(video_id):
     channel = Video.query.get(video_id)
     channel.views = channel.views + 1
