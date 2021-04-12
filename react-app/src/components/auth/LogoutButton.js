@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../store/session";
+import { Button } from "@material-ui/core";
 
 const LogoutButton = () => {
   const dispatch = useDispatch();
@@ -8,7 +9,11 @@ const LogoutButton = () => {
     await dispatch(logoutUser());
   };
 
-  return <a onClick={onLogout}>Logout</a>;
+  return (
+    <Button variant="text" fullWidth onClick={onLogout}>
+      Logout
+    </Button>
+  );
 };
 
 export default LogoutButton;
