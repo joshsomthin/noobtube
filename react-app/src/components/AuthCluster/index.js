@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import LogoutButton from "../auth/LogoutButton";
 import AccountCircleRoundedIcon from "@material-ui/icons/AccountCircleRounded";
-import Menu from "@material-ui/core/Menu";
-import Button from "@material-ui/core/Button";
+import { Menu, Button, ButtonGroup } from "@material-ui/core";
 import LoginModal from "../LoginModal";
 import SignupModal from "../SignupModal";
 import "./AuthCluster.css";
@@ -37,10 +36,10 @@ const AuthCluster = () => {
   );
 
   const loggedOut = (
-    <div className="log">
+    <ButtonGroup>
       <LoginModal />
       <SignupModal />
-    </div>
+    </ButtonGroup>
   );
 
   return logged ? loggedIn : loggedOut;

@@ -15,14 +15,14 @@ const SignupModal = () => {
     setOpen(false);
   };
   return (
-    <div>
+    <>
       <Button variant="text" type="button" onClick={handleOpen}>
         Signup
       </Button>
       <Modal open={open} onClose={handleClose}>
         <SignUpForm />
       </Modal>
-    </div>
+    </>
   );
 };
 

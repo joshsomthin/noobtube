@@ -17,7 +17,7 @@ const LoginModal = () => {
     setOpen(false);
   };
   return (
-    <Container className="form">
+    <>
       <Button
         variant="contained"
         type="button"
@@ -29,7 +29,7 @@ const LoginModal = () => {
       <Modal open={open} onClose={handleClose}>
         <LoginForm />
       </Modal>
-    </Container>
+    </>
   );
 };
 
