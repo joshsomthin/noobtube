@@ -74,8 +74,6 @@ const SignUpForm = () => {
             label="Username"
             name="Username"
             autoFocus
-            type="text"
-            name="username"
             onChange={updateUsername}
             value={username}
           />

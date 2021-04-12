@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import Modal from "@material-ui/core/Modal";
-import { Container } from "@material-ui/core";
 import LoginForm from "../auth/LoginForm";
 import Button from "@material-ui/core/Button";
 import "./LoginModal.css";
