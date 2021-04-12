@@ -93,6 +93,7 @@ const videosReducer = (state = {}, action) => {
     case UPDATE_GENRE:
       newState = { ...state };
       newState.currentGenre = action.genreId;
+      return newState;
     default:
       return state;
   }
