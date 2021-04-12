@@ -4,11 +4,7 @@ import "./index.css";
 import App from "./App";
 import configureStore from "./store";
 import { Provider } from "react-redux";
-import {
-  createMuiTheme,
-  makeStyles,
-  ThemeProvider,
-} from "@material-ui/core/styles";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 const store = configureStore({});
 

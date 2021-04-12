@@ -34,3 +34,12 @@ def channel_videos(channel_id):
     channel = Channel.query.get(channel_id)
     videos = channel['videos']
     return {"channel_vids": [video.to_dict for video in videos]}
+
+
+@video_routes.route('<int:video_id>/watched', methods=['PUT'])
+@login_required
+def update_views(video_id):
+    channel = Video.query.get(video_id)
+    channel.views = channel.views + 1
+    db.session.commit()
+    return {"views": channel.views}

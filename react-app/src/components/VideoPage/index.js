@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { increaseView } from "../../store/videos";
 import ReactPlayer from "react-player";
 import SubsribeButton from "../SubscribeButton";
 import "./VideoPage.css";
 
 const VideoPage = () => {
+  const dispatch = useDispatch();
   const currentVideo = useSelector((state) => state.videos.current);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const addView = () => {
+    dispatch(increaseView(currentVideo.id));
+  };
 
   useEffect(() => {
     if (currentVideo) setIsLoaded(true);
@@ -18,12 +24,19 @@ const VideoPage = () => {
       controls={true}
       width="100%"
       height="100%"
+      onEnded={addView}
       url={currentVideo?.video_path}
     />
   );
 
   const defaultPlayer = (
-    <video className="react-player video" width="100%" height="100%" controls>
+    <video
+      onEnded={addView}
+      className="react-player video"
+      width="100%"
+      height="100%"
+      controls
+    >
       <source src={currentVideo?.video_path} />
     </video>
   );

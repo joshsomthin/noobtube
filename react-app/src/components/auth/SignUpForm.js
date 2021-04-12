@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { TextField, Button, Typography } from "@material-ui/core";
+import { TextField, Button, Typography, withStyles } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { signUpUser } from "../../store/session";
 import "./LoginForm.css";
@@ -14,6 +14,14 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+
+  const StyledTextField = withStyles({
+    root: {
+      backgroundColor: "#a0a0a0",
+      opacity: "60%",
+      borderRadius: "4px",
+    },
+  })(TextField);
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -65,8 +73,8 @@ const SignUpForm = () => {
           ) : (
             ""
           )}
-          <TextField
-            variant="outlined"
+          <StyledTextField
+            variant="filled"
             margin="normal"
             required
             fullWidth
@@ -79,8 +87,8 @@ const SignUpForm = () => {
           />
         </div>
         <div>
-          <TextField
-            variant="outlined"
+          <StyledTextField
+            variant="filled"
             margin="normal"
             required
             fullWidth
@@ -93,8 +101,8 @@ const SignUpForm = () => {
           />
         </div>
         <div>
-          <TextField
-            variant="outlined"
+          <StyledTextField
+            variant="filled"
             margin="normal"
             required
             fullWidth
@@ -107,8 +115,8 @@ const SignUpForm = () => {
           />
         </div>
         <div>
-          <TextField
-            variant="outlined"
+          <StyledTextField
+            variant="filled"
             margin="normal"
             required
             fullWidth

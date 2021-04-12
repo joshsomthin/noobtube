@@ -23,6 +23,15 @@ const loadChannel = (videos) => ({
   videos,
 });
 
+export const increaseView = (videoId) => async (dispatch) => {
+  const res = await fetch(`/api/videos/${videoId}/watched`, {
+    method: "PUT",
+  });
+  const data = await res.json();
+  if (data.errors) throw data;
+  return data;
+};
+
 export const loadVideos = (gameId) => async (dispatch) => {
   const res = await fetch(`/api/videos/${gameId}`);
   const data = await res.json();
