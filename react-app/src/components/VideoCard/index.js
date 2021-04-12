@@ -13,6 +13,7 @@ const VideoCard = ({
   height = "200",
   views = null,
   video = null,
+  genreId,
 }) => {
   const dispatch = useDispatch();
   const updateVideo = async (e) => {

@@ -70,7 +70,7 @@ const VideoPage = () => {
             )}
           </div>
         </div>
-        <div className="sidebar">Hello</div>
+        <div className="sidebar"></div>
       </div>
     )
   );
