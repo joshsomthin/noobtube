@@ -6,6 +6,7 @@
 
 import os
 import json
+from datetime import datetime, date
 from googleapiclient.discovery import build
 
 scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
@@ -14,10 +15,16 @@ scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 def to_info(video):
     # return video['snippet']['title']
     vid = {
+        "channel_name": video['snippet']['channelTitle'],
+        "yt_channel_id": video['snippet']['channelId'],
+        "yt_video_id": video['id']['videoId'],
         "title": video['snippet']['title'],
         "image_path": video['snippet']['thumbnails']['medium']['url'],
         "views": 0,
-        "created_at": video['snippet']['publishedAt'],
+        "created_at": datetime.strftime(
+            datetime.strptime(
+                video['snippet']['publishedAt'], '%Y-%m-%dT%H:%M:%SZ')
+            .date(), '%Y-%m-%d'),
         "video_path": 'https://www.youtube.com/watch?v=' + video['id']['videoId'],
         "description": video['snippet']['description']
     }
@@ -68,4 +75,4 @@ def main(search, next=None):
 
 
 if __name__ == "__main__":
-    main('GTA V', "CAUQAA")
+    main('GTA V')
