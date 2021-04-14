@@ -10,8 +10,6 @@ class Game(db.Model):
 
     videos = db.relationship(
         'Video', back_populates='games', passive_deletes=True)
-    # tags = db.relationship(
-    #     'GameTag', back_populates='games', passive_deletes=True)
 
     @property
     def get_id(self):

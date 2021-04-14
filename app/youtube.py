@@ -13,7 +13,6 @@ scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
 
 def to_info(video):
-    # return video['snippet']['title']
     vid = {
         "channel_name": video['snippet']['channelTitle'],
         "yt_channel_id": video['snippet']['channelId'],
@@ -31,18 +30,18 @@ def to_info(video):
     return vid
 
 
-def main(search, next=None):
+def main(search, number_of_results=12, next=None):
     key = os.environ["YOUTUBE_API_KEY"]
 
     api_service_name = "youtube"
     api_version = "v3"
-    client_secrets_file = "./youtube_secret.json"
 
     youtube = build(api_service_name, api_version, developerKey=key)
     if next:
         next = youtube.search().list(
             part="snippet",
             q=search,
+            maxResults="16",
             eventType="completed",
             type='video',
             videoCategoryId="20",
@@ -59,13 +58,14 @@ def main(search, next=None):
         request = youtube.search().list(
             part="snippet",
             q=search,
+            maxResults=number_of_results,
             eventType="completed",
             type='video',
             videoCategoryId="20",
             regionCode='US'
         )
         response = request.execute()
-        print(json.dumps(response, indent=2))
+        # print(json.dumps(response, indent=2))
         info = {
             "next": response['nextPageToken'],
             "videos": [to_info(video) for video in response['items']],
