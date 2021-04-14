@@ -15,7 +15,7 @@ const Home = () => {
   return (
     isLoaded && (
       <>
-        <h1>Popluar Genres</h1>
+        <h1>Popular Genres</h1>
         {popular.map((el, idx) => {
           return (
             <div key={idx}>
