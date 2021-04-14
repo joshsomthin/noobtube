@@ -15,6 +15,10 @@ class Game(db.Model):
     def get_id(self):
         return self.id
 
+    @property
+    def get_game(self):
+        return self.game
+
     def to_dict(self):
         return {
             'id': self.id,

@@ -30,7 +30,7 @@ def to_info(video):
     return vid
 
 
-def main(search, number_of_results=12, next=None):
+def search_youtube(search, number_of_results=12, next=None):
     key = os.environ["YOUTUBE_API_KEY"]
 
     api_service_name = "youtube"
@@ -48,12 +48,12 @@ def main(search, number_of_results=12, next=None):
             regionCode='US',
             pageToken=next)
         res2 = next.execute()
-        info = {
+        return {
             "next": res2['nextPageToken'],
             "prev": res2['prevPageToken'],
             "videos": [to_info(video) for video in res2['items']]
         }
-        print(json.dumps(info, indent=2))
+        # print(json.dumps(info, indent=2))
     else:
         request = youtube.search().list(
             part="snippet",
@@ -66,13 +66,9 @@ def main(search, number_of_results=12, next=None):
         )
         response = request.execute()
         # print(json.dumps(response, indent=2))
-        info = {
+        return {
             "next": response['nextPageToken'],
             "videos": [to_info(video) for video in response['items']],
         }
 
-        print(json.dumps(info, indent=2))
-
-
-if __name__ == "__main__":
-    main('GTA V')
+        # print(json.dumps(info, indent=2))
