@@ -29,6 +29,21 @@ const updateCurrentGenre = (genreId) => ({
   genreId,
 });
 
+export const addNewVideo = (video) => async (dispatch) => {
+  console.log("in dispatch 33");
+  const res = await fetch(`/api/videos/new`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(video),
+  });
+  const data = await res.json();
+  if (data.errors) throw data;
+  dispatch(currentVideo(data.video));
+  return data;
+};
+
 export const currentGenre = (genreId) => async (dispatch) => {
   dispatch(updateCurrentGenre);
 };

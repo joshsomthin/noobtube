@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { setCurrentVideo } from "../../store/videos";
+import { setCurrentVideo, addNewVideo } from "../../store/videos";
 import "./VideoCard.css";
 
 const VideoCard = ({
@@ -17,6 +17,7 @@ const VideoCard = ({
 }) => {
   const dispatch = useDispatch();
   const updateVideo = async (e) => {
+    if (video?.channel_name) await dispatch(addNewVideo(video));
     if (video) await dispatch(setCurrentVideo(video));
   };
   return (

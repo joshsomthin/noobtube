@@ -12,9 +12,10 @@ from googleapiclient.discovery import build
 scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
 
-def to_info(video):
-    vid = {
+def to_info(video, game_id):
+    return {
         "channel_name": video['snippet']['channelTitle'],
+        "game_id": game_id,
         "yt_channel_id": video['snippet']['channelId'],
         "yt_video_id": video['id']['videoId'],
         "title": video['snippet']['title'],
@@ -27,10 +28,9 @@ def to_info(video):
         "video_path": 'https://www.youtube.com/watch?v=' + video['id']['videoId'],
         "description": video['snippet']['description']
     }
-    return vid
 
 
-def search_youtube(search, number_of_results=12, next=None):
+def search_youtube(search,  game_id, number_of_results=12, next=None):
     key = os.environ["YOUTUBE_API_KEY"]
 
     api_service_name = "youtube"
@@ -53,22 +53,17 @@ def search_youtube(search, number_of_results=12, next=None):
             "prev": res2['prevPageToken'],
             "videos": [to_info(video) for video in res2['items']]
         }
-        # print(json.dumps(info, indent=2))
     else:
         request = youtube.search().list(
             part="snippet",
             q=search,
             maxResults=number_of_results,
-            eventType="completed",
             type='video',
             videoCategoryId="20",
             regionCode='US'
         )
         response = request.execute()
-        # print(json.dumps(response, indent=2))
         return {
             "next": response['nextPageToken'],
-            "videos": [to_info(video) for video in response['items']],
+            "videos": [to_info(video, game_id) for video in response['items']],
         }
-
-        # print(json.dumps(info, indent=2))
