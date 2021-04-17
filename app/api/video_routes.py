@@ -70,4 +70,4 @@ def add_video():
                   description=data['description'])
     db.session.add(video)
     db.session.commit()
-    return {"video": video.to_dict}
+    return {"video": video.to_dict()}

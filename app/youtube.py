@@ -42,8 +42,8 @@ def search_youtube(search,  game_id, number_of_results=12, next=None):
             part="snippet",
             q=search,
             maxResults="16",
-            eventType="completed",
             type='video',
+            videoDuration='medium',
             videoCategoryId="20",
             regionCode='US',
             pageToken=next)
@@ -57,6 +57,7 @@ def search_youtube(search,  game_id, number_of_results=12, next=None):
         request = youtube.search().list(
             part="snippet",
             q=search,
+            videoDuration='medium',
             maxResults=number_of_results,
             type='video',
             videoCategoryId="20",
