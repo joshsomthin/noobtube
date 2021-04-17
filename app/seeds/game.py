@@ -26,7 +26,7 @@ def seed_games(url="https://rawg-video-games-database.p.rapidapi.com/games"):
         if datetime.strptime(res['released'], '%Y-%m-%d').date() > date(2011, 1, 1):
             game_name = res['name']
             game = Game(game=game_name, image_path=res['background_image'])
-            channel = seed_users(game_name)
+            # channel = seed_users(game_name)
             db.session.add(game)
             db.session.commit()
             # if res['clip'] and res['clip']['preview']:
