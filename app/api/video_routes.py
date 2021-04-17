@@ -67,7 +67,8 @@ def add_video():
                   game_id=data['game_id'],
                   views=data['views'],
                   video_path=data['video_path'],
-                  description=data['description'])
+                  description=data['description'],
+                  yt_video_id=data['yt_video_id'])
     db.session.add(video)
     db.session.commit()
     return {"video": video.to_dict()}

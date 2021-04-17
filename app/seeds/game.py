@@ -29,14 +29,14 @@ def seed_games(url="https://rawg-video-games-database.p.rapidapi.com/games"):
             channel = seed_users(game_name)
             db.session.add(game)
             db.session.commit()
-            if res['clip'] and res['clip']['preview']:
-                seed_video(title=f'{game_name} clip',
-                           thumbnail=res['clip']['preview'],
-                           channel_id=channel.id,
-                           game_id=game.id,
-                           created_at=date.today(),
-                           video_path=res['clip']['clip']
-                           )
+            # if res['clip'] and res['clip']['preview']:
+            #     seed_video(title=f'{game_name} clip',
+            #                thumbnail=res['clip']['preview'],
+            #                channel_id=channel.id,
+            #                game_id=game.id,
+            #                created_at=date.today(),
+            #                video_path=res['clip']['clip']
+            #                )
             for genre in res['genres']:
                 genre_obj = genres[genre['name']]
                 game.tags.append(genre_obj)

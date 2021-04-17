@@ -16,6 +16,7 @@ class Video(db.Model):
     created_at = db.Column(db.Date, default=date.today(), nullable=True)
     video_path = db.Column(db.String(300), nullable=False)
     description = db.Column(db.Text, nullable=True, default='')
+    yt_video_id = db.Column(db.String(30), nullable=True)
 
     games = db.relationship(
         'Game', back_populates='videos', )
