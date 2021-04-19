@@ -40,5 +40,6 @@ class Video(db.Model):
             "created_at": self.created_at.strftime("%b %d %Y", ),
             "channel": self.channel.name,
             "video_path": self.video_path,
-            "description": self.description
+            "description": self.description,
+            "yt_video_id": self.yt_video_id
         }
