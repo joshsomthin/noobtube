@@ -4,7 +4,7 @@ import "./GameVideos.css";
 
 const GameVideos = ({ videos }) => {
   return (
-    <div>
+    <div className="grid-container">
       <div className="videocard-container">
         {videos.map((video, idx) => {
           return (

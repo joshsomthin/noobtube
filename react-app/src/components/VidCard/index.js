@@ -3,14 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setCurrentVideo, addNewVideo } from "../../store/videos";
 
-const VidCard = ({
-  game,
-  image_path,
-  width = "360",
-  height = "200",
-  views = null,
-  video = null,
-}) => {
+const VidCard = ({ game, image_path, views = null, video = null }) => {
   const history = useHistory();
   const currentVideo = useSelector((state) => state.videos.current);
   const dispatch = useDispatch();
@@ -27,16 +20,10 @@ const VidCard = ({
     }
   };
   return (
-    <div
-      onClick={updateVideo}
-      className="video-card"
-      style={{ width: "360px" }}
-    >
+    <div onClick={updateVideo} className="video-card" style={{ width: "100%" }}>
       <img
         alt="video card"
-        width={width}
-        height={height}
-        style={{ objectFit: "cover" }}
+        style={{ objectFit: "cover", width: "100%" }}
         src={image_path}
       />
       <div>{game} hi</div>

@@ -11,9 +11,10 @@ video_routes = Blueprint('videos', __name__)
 def get_videos(gameId):
     videos = Video.query.filter(Video.game_id == gameId).all()
     game = Game.query.filter(Game.id == gameId).first()
-    results = search_youtube(
-        search=game.game, number_of_results=12-len(videos), game_id=gameId)
-    return {"videos": [video.to_dict() for video in videos] + results['videos']}
+    # results = search_youtube(
+    #     search=game.game, number_of_results=12-len(videos), game_id=gameId) # quota limit reached. Add back in tomorrow when quota is working.
+    return {"videos": [video.to_dict() for video in videos]}
+    #  + results['videos'] #search functionality removed because of quota limit
 
 
 @video_routes.route('/video/<int:videoId>')
