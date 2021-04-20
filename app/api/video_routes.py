@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, json
 from app.models import Video, User, Subscription, db, Video, Channel, Game
 from flask_login import login_required
 from app.youtube import search_youtube
+from sqlalchemy import desc
 
 
 video_routes = Blueprint('videos', __name__)
@@ -9,7 +10,9 @@ video_routes = Blueprint('videos', __name__)
 
 @video_routes.route('/<int:gameId>')
 def get_videos(gameId):
-    videos = Video.query.filter(Video.game_id == gameId).all()
+    videos = Video.query.filter(
+        Video.game_id == gameId).order_by(desc(Video.views)).all()
+
     game = Game.query.filter(Game.id == gameId).first()
     # results = search_youtube(
     #     search=game.game, number_of_results=12-len(videos), game_id=gameId) # quota limit reached. Add back in tomorrow when quota is working.
