@@ -6,7 +6,7 @@ class Video(db.Model):
     __tablename__ = 'videos'
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50), nullable=False)
+    title = db.Column(db.String(100), nullable=False)
     image_path = db.Column(db.String(100), nullable=False)
     channel_id = db.Column(db.Integer, db.ForeignKey(
         'channels.id', ondelete='CASCADE',),  nullable=False, )
@@ -16,6 +16,7 @@ class Video(db.Model):
     created_at = db.Column(db.Date, default=date.today(), nullable=True)
     video_path = db.Column(db.String(300), nullable=False)
     description = db.Column(db.Text, nullable=True, default='')
+    yt_video_id = db.Column(db.String(30), nullable=True)
 
     games = db.relationship(
         'Game', back_populates='videos', )
@@ -39,5 +40,6 @@ class Video(db.Model):
             "created_at": self.created_at.strftime("%b %d %Y", ),
             "channel": self.channel.name,
             "video_path": self.video_path,
-            "description": self.description
+            "description": self.description,
+            "yt_video_id": self.yt_video_id
         }

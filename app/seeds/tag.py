@@ -5,14 +5,13 @@ from app.models import db, Tag
 
 
 def seed_tags():
-    url = "https://rawg-video-games-database.p.rapidapi.com/genres"
+    url = "https://api.rawg.io/api/genres"
 
     headers = {
-        'x-rapidapi-key': os.environ.get('RAPIDAPI_KEY').strip(),
-        'x-rapidapi-host': "rawg-video-games-database.p.rapidapi.com"
+        'key': os.environ.get('RAPIDAPI_KEY').strip(),
     }
 
-    response = requests.request("GET", url, headers=headers)
+    response = requests.request("GET", url, params=headers)
 
     json_data = json.loads(response.text)
 

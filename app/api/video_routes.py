@@ -1,6 +1,7 @@
-from flask import Blueprint, jsonify
-from app.models import Video, User, Subscription, db, Video, Channel
+from flask import Blueprint, jsonify, request, json
+from app.models import Video, User, Subscription, db, Video, Channel, Game
 from flask_login import login_required
+from app.youtube import search_youtube
 
 
 video_routes = Blueprint('videos', __name__)
@@ -9,7 +10,10 @@ video_routes = Blueprint('videos', __name__)
 @video_routes.route('/<int:gameId>')
 def get_videos(gameId):
     videos = Video.query.filter(Video.game_id == gameId).all()
-    return {"videos": [video.to_dict() for video in videos]}
+    game = Game.query.filter(Game.id == gameId).first()
+    results = search_youtube(
+        search=game.game, number_of_results=12-len(videos), game_id=gameId)
+    return {"videos": [video.to_dict() for video in videos] + results['videos']}
 
 
 @video_routes.route('/video/<int:videoId>')
@@ -42,3 +46,29 @@ def update_views(video_id):
     channel.views = channel.views + 1
     db.session.commit()
     return {"views": channel.views}
+
+
+@video_routes.route('/new', methods=['POST'])
+def add_video():
+    data = request.json
+    doesChannelExist = Channel.query.filter(
+        Channel.name == data['channel_name']).first()
+    if not doesChannelExist:
+        user = User(username=data['channel_name'], email=(
+            data['channel_name'] + '@yt.io'), password='password')
+        db.session.add(user)
+        db.session.commit()
+        doesChannelExist = Channel(name=data['channel_name'], user_id=user.id)
+        db.session.add(doesChannelExist)
+        db.session.commit()
+    video = Video(title=data['title'],
+                  image_path=data['image_path'],
+                  channel_id=doesChannelExist.id,
+                  game_id=data['game_id'],
+                  views=data['views'],
+                  video_path=data['video_path'],
+                  description=data['description'],
+                  yt_video_id=data['yt_video_id'])
+    db.session.add(video)
+    db.session.commit()
+    return {"video": video.to_dict()}

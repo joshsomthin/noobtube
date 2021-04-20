@@ -1,5 +1,5 @@
 import React from "react";
-import VideoCard from "../VideoCard";
+import VidCard from "../VidCard";
 import "./GameVideos.css";
 
 const GameVideos = ({ videos }) => {
@@ -8,7 +8,7 @@ const GameVideos = ({ videos }) => {
       <div className="videocard-container">
         {videos.map((video, idx) => {
           return (
-            <VideoCard
+            <VidCard
               key={idx}
               link={`/videos/${video.id}`}
               image_path={video.image_path}
