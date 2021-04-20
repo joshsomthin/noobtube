@@ -1,37 +1,48 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { addNewVideo } from "../../store/videos";
+import { setCurrentVideo, addNewVideo } from "../../store/videos";
+import "./VideoCard.css";
 
-const VidCard = ({ size, video, key }) => {
+const VidCard = ({
+  link,
+  idx,
+  game,
+  image_path,
+  width = "360",
+  height = "200",
+  views = null,
+  video = null,
+  genreId,
+}) => {
   const history = useHistory();
-  const [videoId, setVideoId] = useState(1);
+  const [videoId, setVideoId] = useState(link);
   const dispatch = useDispatch();
-
   const updateVideo = async (e) => {
     if (video?.channel_name) {
-      let vidId = await dispatch(addNewVideo(video));
-      setVideoId(vidId);
-    } else {
+      dispatch(addNewVideo(video)).then((res) => setVideoId(res));
+      history.push(`/videos/${videoId}`);
     }
-    history.push(`/videos/${videoId}`);
+    if (video) {
+      await dispatch(setCurrentVideo(video));
+      history.push(`/videos/${videoId}`);
+    }
   };
   return (
     <div
-      key={key}
       onClick={updateVideo}
       className="video-card"
       style={{ width: "360px" }}
     >
       <img
         alt="video card"
-        width={"360"}
-        height={"200"}
+        width={width}
+        height={height}
         style={{ objectFit: "cover" }}
-        src={video.image_path}
+        src={image_path}
       />
-      <div>{video}</div>
-      {video?.views !== null ? <div>{video?.views} views</div> : ""}
+      <div>{game}</div>
+      {views !== null ? <div>{views} views</div> : ""}
     </div>
   );
 };
