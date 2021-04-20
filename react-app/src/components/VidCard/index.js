@@ -1,31 +1,29 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setCurrentVideo, addNewVideo } from "../../store/videos";
-import "./VideoCard.css";
 
 const VidCard = ({
-  link,
-  idx,
   game,
   image_path,
   width = "360",
   height = "200",
   views = null,
   video = null,
-  genreId,
 }) => {
   const history = useHistory();
-  const [videoId, setVideoId] = useState(link);
+  const currentVideo = useSelector((state) => state.videos.current);
   const dispatch = useDispatch();
   const updateVideo = async (e) => {
     if (video?.channel_name) {
-      dispatch(addNewVideo(video)).then((res) => setVideoId(res));
-      history.push(`/videos/${videoId}`);
+      dispatch(addNewVideo(video)).then((res) =>
+        history.push(`/videos/${res.video.id}`)
+      );
+      return await dispatch(setCurrentVideo(video));
     }
     if (video) {
       await dispatch(setCurrentVideo(video));
-      history.push(`/videos/${videoId}`);
+      return history.push(`/videos/${currentVideo?.id}`);
     }
   };
   return (
@@ -41,7 +39,7 @@ const VidCard = ({
         style={{ objectFit: "cover" }}
         src={image_path}
       />
-      <div>{game}</div>
+      <div>{game} hi</div>
       {views !== null ? <div>{views} views</div> : ""}
     </div>
   );

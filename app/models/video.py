@@ -6,7 +6,7 @@ class Video(db.Model):
     __tablename__ = 'videos'
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50), nullable=False)
+    title = db.Column(db.String(100), nullable=False)
     image_path = db.Column(db.String(100), nullable=False)
     channel_id = db.Column(db.Integer, db.ForeignKey(
         'channels.id', ondelete='CASCADE',),  nullable=False, )

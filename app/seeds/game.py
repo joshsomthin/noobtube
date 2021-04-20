@@ -7,17 +7,17 @@ from .users import seed_users
 from .video import seed_video
 
 
-def seed_games(url="https://rawg-video-games-database.p.rapidapi.com/games"):
+def seed_games(url="https://api.rawg.io/api/games"):
 
     allgenres = Tag.query.all()
     genres = {genre.name: genre for genre in allgenres}
 
     headers = {
-        'x-rapidapi-key': os.environ.get('RAPIDAPI_KEY').strip(),
-        'x-rapidapi-host': "rawg-video-games-database.p.rapidapi.com"
+        'key': os.environ.get('RAPIDAPI_KEY').strip(),
+        # 'x-rapidapi-host': "rawg-video-games-database.p.rapidapi.com"
     }
 
-    response = requests.request("GET", url, headers=headers)
+    response = requests.request("GET", url, params=headers)
     json_data = json.loads(response.text)
 
     for res in json_data['results']:
