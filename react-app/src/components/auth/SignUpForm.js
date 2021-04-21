@@ -78,12 +78,12 @@ const SignUpForm = () => {
             margin="normal"
             required
             fullWidth
-            type="email"
+            type="text"
             label="Username"
-            name="Username"
+            name="username"
             autoFocus
-            onChange={updateUsername}
-            value={username}
+            value={email}
+            onChange={updateEmail}
           />
         </div>
         <div>
@@ -95,9 +95,8 @@ const SignUpForm = () => {
             type="email"
             label="Email Address"
             name="email"
-            autoComplete="email"
-            value={email}
-            onChange={updateEmail}
+            value={username}
+            onChange={updateUsername}
           />
         </div>
         <div>
@@ -109,7 +108,6 @@ const SignUpForm = () => {
             type="password"
             label="Password"
             name="password"
-            autoComplete="email"
             value={password}
             onChange={updatePassword}
           />
@@ -122,8 +120,7 @@ const SignUpForm = () => {
             fullWidth
             type="password"
             label="Confirm Password"
-            name="password"
-            autoComplete="email"
+            name="confirmpassword"
             value={repeatPassword}
             onChange={updateRepeatPassword}
           />
