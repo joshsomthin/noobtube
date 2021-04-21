@@ -24,7 +24,7 @@ const LoginForm = () => {
     e.preventDefault();
     const user = await dispatch(userLogin(email, password));
     if (!user.errors) {
-      history.push("/");
+      return;
     } else {
       setErrors(user.errors);
     }
