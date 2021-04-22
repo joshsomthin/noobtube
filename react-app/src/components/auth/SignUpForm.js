@@ -1,9 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { TextField, Button, Typography, withStyles } from "@material-ui/core";
+import {
+  TextField,
+  Button,
+  Typography,
+  Grid,
+  Link,
+  makeStyles,
+} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { signUpUser } from "../../store/session";
 import "./LoginForm.css";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiTextField-root": {
+      backgroundColor: "#a0a0a0",
+      opacity: "60%",
+      borderRadius: "4px",
+    },
+  },
+}));
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
@@ -14,14 +31,7 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-
-  const StyledTextField = withStyles({
-    root: {
-      backgroundColor: "#a0a0a0",
-      opacity: "60%",
-      borderRadius: "4px",
-    },
-  })(TextField);
+  const classes = useStyles();
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -38,18 +48,22 @@ const SignUpForm = () => {
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
+    console.log(username);
   };
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
+    console.log(email);
   };
 
   const updatePassword = (e) => {
     setPassword(e.target.value);
+    console.log(password);
   };
 
   const updateRepeatPassword = (e) => {
     setRepeatPassword(e.target.value);
+    console.log(repeatPassword);
   };
 
   useEffect(() => {
@@ -62,72 +76,83 @@ const SignUpForm = () => {
       <Typography component="h1" variant="h5">
         Sign Up
       </Typography>
-      <form onSubmit={onSignUp}>
-        <div>
-          {errors ? (
-            <ul>
-              {errors.map((err) => (
-                <li>{err}</li>
-              ))}
-            </ul>
-          ) : (
-            ""
-          )}
-          <StyledTextField
+      <form
+        className={classes.root}
+        onSubmit={onSignUp}
+        autoComplete="off"
+        noValidate
+      >
+        <div className="text-box">
+          <TextField
             variant="filled"
-            margin="normal"
             required
             fullWidth
-            type="text"
+            id="userName"
             label="Username"
             name="username"
             autoFocus
-            value={email}
-            onChange={updateEmail}
-          />
-        </div>
-        <div>
-          <StyledTextField
-            variant="filled"
-            margin="normal"
-            required
-            fullWidth
-            type="email"
-            label="Email Address"
-            name="email"
             value={username}
             onChange={updateUsername}
           />
         </div>
-        <div>
-          <StyledTextField
+        <div className="text-box">
+          <TextField
             variant="filled"
-            margin="normal"
             required
             fullWidth
-            type="password"
-            label="Password"
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            value={email}
+            onChange={updateEmail}
+          />
+        </div>
+        <div className="text-box">
+          <TextField
+            variant="filled"
+            required
+            fullWidth
             name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
             value={password}
             onChange={updatePassword}
           />
         </div>
-        <div>
-          <StyledTextField
+        <div className="text-box">
+          <TextField
             variant="filled"
-            margin="normal"
             required
             fullWidth
-            type="password"
+            name="confirm-password"
             label="Confirm Password"
-            name="confirmpassword"
+            type="password"
+            id="confirm-password"
+            autoComplete="confirm-password"
             value={repeatPassword}
             onChange={updateRepeatPassword}
           />
         </div>
-        <Button type="submit" fullWidth variant="contained" color="primary">
+        <Button
+          className="text-box"
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          // className={classes.submit}
+        >
           Sign Up
         </Button>
+        <Grid container justify="flex-end">
+          <Grid item>
+            <Link href="#" variant="body2">
+              Already have an account? Sign in
+            </Link>
+          </Grid>
+        </Grid>
       </form>
     </div>
   );

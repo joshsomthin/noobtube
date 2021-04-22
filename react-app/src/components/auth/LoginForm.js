@@ -1,24 +1,27 @@
 import React, { useState } from "react";
-import { TextField, Button, Typography, withStyles } from "@material-ui/core";
+import { TextField, Button, Typography, makeStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { userLogin } from "../../store/session";
 import "./LoginForm.css";
 
-const LoginForm = () => {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const [errors, setErrors] = useState([]);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const StyledTextField = withStyles({
-    root: {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiTextField-root": {
       backgroundColor: "#a0a0a0",
       opacity: "60%",
       borderRadius: "4px",
     },
-  })(TextField);
+  },
+}));
+
+const LoginForm = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const classes = useStyles();
+  const [errors, setErrors] = useState([]);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -53,14 +56,14 @@ const LoginForm = () => {
       <Typography component="h1" variant="h5">
         Sign in
       </Typography>
-      <form onSubmit={onLogin}>
+      <form className={classes.root} onSubmit={onLogin}>
         <div>
           {errors.map((error) => (
             <div>{error}</div>
           ))}
         </div>
-        <div>
-          <StyledTextField
+        <div className="text-box">
+          <TextField
             variant="filled"
             margin="normal"
             required
@@ -74,8 +77,8 @@ const LoginForm = () => {
             onChange={updateEmail}
           />
         </div>
-        <div>
-          <StyledTextField
+        <div className="text-box">
+          <TextField
             variant="filled"
             margin="normal"
             required
@@ -90,6 +93,7 @@ const LoginForm = () => {
           />
         </div>
         <Button
+          className="text-box"
           style={{ marginBottom: "9px" }}
           type="submit"
           fullWidth
