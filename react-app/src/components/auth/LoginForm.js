@@ -54,7 +54,7 @@ const LoginForm = () => {
   return (
     <div className="container">
       <Typography component="h1" variant="h5">
-        Sign in
+        Log in
       </Typography>
       <form className={classes.root} onSubmit={onLogin}>
         <div>
@@ -62,7 +62,7 @@ const LoginForm = () => {
             <div>{error}</div>
           ))}
         </div>
-        <div className="text-box">
+        <div>
           <TextField
             variant="filled"
             margin="normal"
@@ -77,7 +77,7 @@ const LoginForm = () => {
             onChange={updateEmail}
           />
         </div>
-        <div className="text-box">
+        <div>
           <TextField
             variant="filled"
             margin="normal"
@@ -94,7 +94,7 @@ const LoginForm = () => {
         </div>
         <Button
           className="text-box"
-          style={{ marginBottom: "9px" }}
+          style={{ marginBottom: "15px", marginTop: "8px" }}
           type="submit"
           fullWidth
           variant="contained"

@@ -73,9 +73,11 @@ const SignUpForm = () => {
   }, [stateErrors]);
   return (
     <div className="container">
-      <Typography component="h1" variant="h5">
-        Sign Up
-      </Typography>
+      <div style={{ marginBottom: "15px" }}>
+        <Typography component="h1" variant="h5">
+          Sign Up
+        </Typography>
+      </div>
       <form
         className={classes.root}
         onSubmit={onSignUp}
