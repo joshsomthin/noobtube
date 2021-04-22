@@ -4,7 +4,7 @@ import Modal from "@material-ui/core/Modal";
 import SignUpForm from "../auth/SignUpForm";
 import Button from "@material-ui/core/Button";
 
-const SignupModal = () => {
+const SignupModal = ({ text = "SignUp", classes = "" }) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -16,8 +16,13 @@ const SignupModal = () => {
   };
   return (
     <>
-      <Button variant="text" type="button" onClick={handleOpen}>
-        Signup
+      <Button
+        classes={classes}
+        variant="text"
+        type="button"
+        onClick={handleOpen}
+      >
+        {text}
       </Button>
       <Modal open={open} onClose={handleClose}>
         <SignUpForm />

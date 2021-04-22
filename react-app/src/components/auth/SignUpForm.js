@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  TextField,
-  Button,
-  Typography,
-  Grid,
-  Link,
-  makeStyles,
-} from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { TextField, Button, Typography, makeStyles } from "@material-ui/core";
 import { signUpUser } from "../../store/session";
 import "./LoginForm.css";
 
@@ -24,9 +16,8 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const stateErrors = useSelector((state) => state.errors);
-  const [errors, setErrors] = useState("");
+  const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,13 +28,12 @@ const SignUpForm = () => {
     e.preventDefault();
     if (password === repeatPassword) {
       const user = await dispatch(signUpUser(username, email, password));
-      if (user.errors) {
+      if (!user.errors) {
         return;
       } else {
-        history.push("/");
+        setErrors(["Passwords do not match"]);
       }
     }
-    setErrors(["Passwords do not match"]);
   };
 
   const updateUsername = (e) => {
@@ -84,6 +74,11 @@ const SignUpForm = () => {
         autoComplete="off"
         noValidate
       >
+        <div>
+          {errors?.map((error) => (
+            <div>{error}</div>
+          ))}
+        </div>
         <div className="text-box">
           <TextField
             variant="filled"
@@ -148,13 +143,6 @@ const SignUpForm = () => {
         >
           Sign Up
         </Button>
-        <Grid container justify="flex-end">
-          <Grid item>
-            <Link href="#" variant="body2">
-              Already have an account? Sign in
-            </Link>
-          </Grid>
-        </Grid>
       </form>
     </div>
   );

@@ -1,12 +1,27 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { updateSubscribe, updateUnsubscribe } from "../../store/session";
 import Button from "@material-ui/core/Button";
+import SignupModal from "../SignupModal";
 import "./SubscribeButton.css";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiButton-root": {
+      background: "#9d07c3",
+      borderRadius: 3,
+      border: 0,
+      color: "white",
+      height: 48,
+      padding: "0 30px",
+    },
+  },
+}));
+
 const SubscribeButton = ({ channelId }) => {
+  const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
@@ -50,12 +65,18 @@ const SubscribeButton = ({ channelId }) => {
     dispatch(updateUnsubscribe(user.id, channelId));
   };
 
-  return alreadySubscribed ? (
+  const subscribed = alreadySubscribed ? (
     <StyledUnsubscribeButton onClick={unSubscribe}>
       Unsubscribe
     </StyledUnsubscribeButton>
   ) : (
     <StyledSubscribeButton onClick={subscribe}>Subscribe</StyledSubscribeButton>
+  );
+
+  return user?.id ? (
+    subscribed
+  ) : (
+    <SignupModal className={classes.root} text="SUBSCRIBE" />
   );
 };
 
