@@ -28,6 +28,9 @@ class Video(db.Model):
             time_delta = date.today() - self.created_at
             return time_delta.days
 
+    def get_video_id(self):
+        return self.yt_video_id
+
     def to_dict(self):
         return {
             "id": self.id,
