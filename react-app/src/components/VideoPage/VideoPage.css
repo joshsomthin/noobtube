@@ -12,10 +12,12 @@
 .grid {
   display: grid;
   grid-template-columns: 4fr 1fr;
+  height: 1vh;
 }
 
 .sidebar {
   margin-left: 30px;
+  overflow-y: scroll;
 }
 
 .video-info {
@@ -23,4 +25,8 @@
   padding-bottom: 10px;
   display: flex;
   justify-content: space-between;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
 }

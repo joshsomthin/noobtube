@@ -3,11 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { increaseView } from "../../store/videos";
 import ReactPlayer from "react-player";
 import SubsribeButton from "../SubscribeButton";
+import VidCard from "../VidCard";
 import "./VideoPage.css";
 
 const VideoPage = () => {
   const dispatch = useDispatch();
   const currentVideo = useSelector((state) => state.videos.current);
+  const sidebarVideos = useSelector((state) => state.videos.videos);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const addView = () => {
@@ -70,7 +72,22 @@ const VideoPage = () => {
             )}
           </div>
         </div>
-        <div className="sidebar"></div>
+        <div className="sidebar">
+          <h2>Related Videos</h2>
+          {sidebarVideos
+            .filter((video) => video.yt_video_id !== currentVideo.yt_video_id)
+            .map((video, idx) => {
+              return (
+                <VidCard
+                  key={idx}
+                  image_path={video.image_path}
+                  game={video.title}
+                  views={video.views}
+                  video={video}
+                />
+              );
+            })}
+        </div>
       </div>
     )
   );
