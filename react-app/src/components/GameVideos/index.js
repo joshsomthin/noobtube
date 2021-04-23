@@ -10,7 +10,6 @@ const GameVideos = ({ videos }) => {
           return (
             <VidCard
               key={idx}
-              link={`/videos/${video.id}`}
               image_path={video.image_path}
               game={video.title}
               views={video.views}
