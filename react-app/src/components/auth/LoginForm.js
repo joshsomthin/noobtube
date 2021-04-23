@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { TextField, Button, Typography, makeStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { userLogin } from "../../store/session";
 import "./LoginForm.css";
 
@@ -17,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const classes = useStyles();
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
@@ -37,7 +35,7 @@ const LoginForm = () => {
     e.preventDefault();
     const user = await dispatch(userLogin("Demo@aa.io", "password"));
     if (!user.errors) {
-      history.push("/");
+      return;
     } else {
       setErrors(user.errors);
     }
