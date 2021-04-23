@@ -1,6 +1,30 @@
-.videocard-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+@media screen and (max-width: 300px) {
+  .videocard-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media screen and (min-width: 500px) {
+  .videocard-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (min-width: 750px) {
+  .videocard-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (min-width: 1050px) {
+  .videocard-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .grid-container {

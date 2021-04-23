@@ -24,7 +24,7 @@ def to_info(video, game_id):
     }
 
 
-def search_youtube(search,  game_id, number_of_results=12, next=None):
+def search_youtube(search,  game_id, number_of_results=16, next=None):
     key = os.environ["YOUTUBE_API_KEY"]
 
     api_service_name = "youtube"

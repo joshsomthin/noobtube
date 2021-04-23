@@ -26,7 +26,7 @@ const VidCard = ({ game, image_path, views = null, video = null }) => {
         style={{ objectFit: "cover", width: "100%" }}
         src={image_path}
       />
-      <div>{game} hi</div>
+      <div>{game}</div>
       {views !== null ? <div>{views} views</div> : ""}
     </div>
   );

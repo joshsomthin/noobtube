@@ -1,30 +1,31 @@
 import React, { useState } from "react";
-import { TextField, Button, Typography, withStyles } from "@material-ui/core";
+import { TextField, Button, Typography, makeStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { userLogin } from "../../store/session";
 import "./LoginForm.css";
 
-const LoginForm = () => {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const [errors, setErrors] = useState([]);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const StyledTextField = withStyles({
-    root: {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiTextField-root": {
       backgroundColor: "#a0a0a0",
       opacity: "60%",
       borderRadius: "4px",
     },
-  })(TextField);
+  },
+}));
+
+const LoginForm = () => {
+  const dispatch = useDispatch();
+  const classes = useStyles();
+  const [errors, setErrors] = useState([]);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const onLogin = async (e) => {
     e.preventDefault();
     const user = await dispatch(userLogin(email, password));
     if (!user.errors) {
-      history.push("/");
+      return;
     } else {
       setErrors(user.errors);
     }
@@ -34,7 +35,7 @@ const LoginForm = () => {
     e.preventDefault();
     const user = await dispatch(userLogin("Demo@aa.io", "password"));
     if (!user.errors) {
-      history.push("/");
+      return;
     } else {
       setErrors(user.errors);
     }
@@ -51,16 +52,16 @@ const LoginForm = () => {
   return (
     <div className="container">
       <Typography component="h1" variant="h5">
-        Sign in
+        Log in
       </Typography>
-      <form onSubmit={onLogin}>
+      <form className={classes.root} onSubmit={onLogin}>
         <div>
           {errors.map((error) => (
             <div>{error}</div>
           ))}
         </div>
         <div>
-          <StyledTextField
+          <TextField
             variant="filled"
             margin="normal"
             required
@@ -75,7 +76,7 @@ const LoginForm = () => {
           />
         </div>
         <div>
-          <StyledTextField
+          <TextField
             variant="filled"
             margin="normal"
             required
@@ -90,7 +91,8 @@ const LoginForm = () => {
           />
         </div>
         <Button
-          style={{ marginBottom: "9px" }}
+          className="text-box"
+          style={{ marginBottom: "15px", marginTop: "8px" }}
           type="submit"
           fullWidth
           variant="contained"
