@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
@@ -17,6 +17,10 @@ import "./AuthCluster.css";
 const AuthCluster = () => {
   const logged = useSelector((state) => state.user.user);
   const [anchorEl, setanchorEl] = useState(null);
+
+  useEffect(() => {
+    console.log("This is line 22 in authcluster.", anchorEl);
+  }, [anchorEl]);
 
   const handleClick = (e) => {
     setanchorEl(e.currentTarget);
@@ -58,7 +62,7 @@ const AuthCluster = () => {
     <>
       <Button
         aria-controls="customized-menu"
-        aria-haspopup="true"
+        aria-haspopup="false"
         variant="outline"
         color="primary"
         onClick={handleClick}
@@ -72,10 +76,10 @@ const AuthCluster = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
+        <StyledMenuItem onClick={handleClose}>
           <NavLink to={`/${logged?.id}/subscriptions`}>Subscriptions</NavLink>
         </StyledMenuItem>
-        <StyledMenuItem>
+        <StyledMenuItem onClick={handleClose}>
           <LogoutButton />
         </StyledMenuItem>
       </StyledMenu>
