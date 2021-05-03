@@ -20,7 +20,11 @@ const VidCard = ({ game, image_path, views = null, video = null }) => {
     }
   };
   return (
-    <div onClick={updateVideo} className="video-card" style={{ width: "100%" }}>
+    <div
+      onClick={updateVideo}
+      className="video-card"
+      style={{ cursor: "pointer", width: "100%" }}
+    >
       <img
         alt="video card"
         style={{ objectFit: "cover", width: "100%" }}
