@@ -8,7 +8,9 @@ from .video import seed_video
 
 
 def create_game(game):
-    return Game(game=game['name'], image_path=game['background_image'])
+    instance = Game(game=game['name'], image_path=game['background_image'])
+    db.session.add(instance)
+    db.session.commit()
 
 
 def game_to_json(game):
@@ -46,10 +48,17 @@ def seed_games(url="https://api.rawg.io/api/games"):
 
 def search_games(search, url="https://api.rawg.io/api/games"):
 
+    videos = Game.query.filter(Game.game.ilike(
+        f'%{search}%')).all()
+
+    videos = [vid.to_name() for vid in videos]
+
     headers = {
         'key': os.environ.get('RAPIDAPI_KEY').strip(),
         'search': search
     }
     response = requests.request("GET", url, params=headers)
     json_data = json.loads(response.text)
-    return {'results': [game_to_json(res) for res in json_data['results']]}
+    [create_game(res) for res in json_data['results']
+     if res['name'] not in videos]
+    return

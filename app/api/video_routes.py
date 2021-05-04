@@ -85,6 +85,7 @@ def add_video():
 def search_bar():
     data = request.json
     game = search_games(data)
-    print(game)
+    videos = Game.query.filter(Game.game.ilike(
+        f'%{data}%')).all()
 
-    return data
+    return {'results': [vid.to_dict() for vid in videos]}
