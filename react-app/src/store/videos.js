@@ -3,6 +3,7 @@ const CURRENT_VIDEO = "videos/CURRENT_VIDEO";
 const LOAD_SUBS = "subscriptions/LOAD_SUBS";
 const LOAD_CHANNEL = "subscriptions/LOAD_CHANNEL";
 const UPDATE_GENRE = "videos/UPDATE_GENRE";
+const SEARCH_GAMES = "videos/SEARCH_GAMES";
 
 const queryVideos = (videos) => ({
   type: LOAD_VIDEOS,
@@ -29,8 +30,23 @@ const updateCurrentGenre = (genreId) => ({
   genreId,
 });
 
+const searchVideos = (games, videos) => ({
+  type: SEARCH_GAMES,
+  games,
+  videos,
+});
+
+export const searchVideoGames = (search) => async (dispatch) => {
+  const res = await fetch(`/api/videos/search`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(search),
+  });
+};
+
 export const addNewVideo = (video) => async (dispatch) => {
-  console.log("in dispatch 33");
   const res = await fetch(`/api/videos/new`, {
     method: "POST",
     headers: {

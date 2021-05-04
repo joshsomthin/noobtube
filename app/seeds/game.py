@@ -7,6 +7,10 @@ from .users import seed_users
 from .video import seed_video
 
 
+def create_game(game):
+    return Game(game=game['name'], image_path=game['background_image'])
+
+
 def seed_games(url="https://api.rawg.io/api/games"):
 
     allgenres = Tag.query.all()
@@ -24,8 +28,7 @@ def seed_games(url="https://api.rawg.io/api/games"):
         if res['released'] == None:
             return
         if datetime.strptime(res['released'], '%Y-%m-%d').date() > date(2011, 1, 1):
-            game_name = res['name']
-            game = Game(game=game_name, image_path=res['background_image'])
+            game = create_game(res)
             # channel = seed_users(game_name)
             db.session.add(game)
             db.session.commit()

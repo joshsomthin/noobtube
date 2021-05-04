@@ -78,3 +78,11 @@ def add_video():
     db.session.add(video)
     db.session.commit()
     return {"video": video.to_dict()}
+
+
+@video_routes.route('/search', methods=['POST'])
+def search_bar():
+    data = request.json
+    print(data)
+
+    return data
