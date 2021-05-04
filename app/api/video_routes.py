@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, json
 from app.models import Video, User, Subscription, db, Video, Channel, Game
 from flask_login import login_required
 from app.youtube import search_youtube
+from app.seeds.game import search_games
 from sqlalchemy import desc
 
 
@@ -83,6 +84,7 @@ def add_video():
 @video_routes.route('/search', methods=['POST'])
 def search_bar():
     data = request.json
-    print(data)
+    game = search_games(data)
+    print(game)
 
     return data
