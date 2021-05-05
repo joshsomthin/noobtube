@@ -84,8 +84,10 @@ def add_video():
 @video_routes.route('/search', methods=['POST'])
 def search_bar():
     data = request.json
-    game = search_games(data)
+    if data == '':
+        return
+    search_games(data)
     videos = Game.query.filter(Game.game.ilike(
         f'%{data}%')).all()
-
+    print(videos)
     return {'results': [vid.to_dict() for vid in videos]}

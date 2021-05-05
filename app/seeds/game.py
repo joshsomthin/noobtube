@@ -8,9 +8,10 @@ from .video import seed_video
 
 
 def create_game(game):
-    instance = Game(game=game['name'], image_path=game['background_image'])
-    db.session.add(instance)
+    new_game = Game(game=game['name'], image_path=game['background_image'])
+    db.session.add(new_game)
     db.session.commit()
+    return new_game
 
 
 def game_to_json(game):
@@ -37,8 +38,7 @@ def seed_games(url="https://api.rawg.io/api/games"):
             return
         if datetime.strptime(res['released'], '%Y-%m-%d').date() > date(2011, 1, 1):
             game = create_game(res)
-            db.session.add(game)
-            db.session.commit()
+            print(game)
             for genre in res['genres']:
                 genre_obj = genres[genre['name']]
                 game.tags.append(genre_obj)
@@ -50,7 +50,7 @@ def search_games(search, url="https://api.rawg.io/api/games"):
 
     videos = Game.query.filter(Game.game.ilike(
         f'%{search}%')).all()
-
+    print(videos)
     videos = [vid.to_name() for vid in videos]
 
     headers = {
