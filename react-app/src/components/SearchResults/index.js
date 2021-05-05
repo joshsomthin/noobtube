@@ -15,7 +15,8 @@ const SearchResults = () => {
   }, [searchTerm, dispatch]);
 
   return (
-    isLoaded && (
+    isLoaded &&
+    (results.length ? (
       <div className="grid-container">
         <div className="videocard-container">
           {results.map((game, idx) => {
@@ -33,7 +34,14 @@ const SearchResults = () => {
           })}
         </div>
       </div>
-    )
+    ) : (
+      <div className="not-found">
+        <h1>
+          Sorry, there doesn't seem to be any search results matching your
+          query.
+        </h1>
+      </div>
+    ))
   );
 };
 

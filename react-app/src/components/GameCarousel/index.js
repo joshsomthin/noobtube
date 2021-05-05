@@ -26,6 +26,8 @@ const GameCarousel = ({ id }) => {
             return (
               <VideoCard
                 game={game.game}
+                width="100%"
+                height="100%"
                 link={`/games/${game.id}`}
                 idx={idx}
                 image_path={game.image_path}
