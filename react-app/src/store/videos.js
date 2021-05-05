@@ -30,9 +30,8 @@ const updateCurrentGenre = (genreId) => ({
   genreId,
 });
 
-const searchVideos = (games, videos) => ({
+const searchVideos = (videos) => ({
   type: SEARCH_GAMES,
-  games,
   videos,
 });
 
@@ -44,6 +43,11 @@ export const searchVideoGames = (search) => async (dispatch) => {
     },
     body: JSON.stringify(search),
   });
+
+  const data = await res.json();
+  if (data.errors) throw data;
+  dispatch(searchVideos(data.results));
+  return data;
 };
 
 export const addNewVideo = (video) => async (dispatch) => {
@@ -123,6 +127,10 @@ const videosReducer = (state = {}, action) => {
     case UPDATE_GENRE:
       newState = { ...state };
       newState.currentGenre = action.genreId;
+      return newState;
+    case SEARCH_GAMES:
+      newState = { ...state };
+      newState.search = action.videos;
       return newState;
     default:
       return state;

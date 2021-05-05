@@ -1,22 +1,21 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
 import { TextField } from "@material-ui/core";
-import { searchVideoGames } from "../../store/videos";
 
 const Search = () => {
-  const dispatch = useDispatch();
+  const history = useHistory();
   const [search, setSearch] = useState("");
-
   const handleUpdate = (e) => {
     setSearch(e.target.value);
   };
 
   const searchGames = async (e) => {
     e.preventDefault();
-    await dispatch(searchVideoGames(search));
+    history.push(`/search/${search}`);
+    setSearch("");
   };
 
   return (

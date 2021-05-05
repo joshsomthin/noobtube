@@ -89,5 +89,4 @@ def search_bar():
     search_games(data)
     videos = Game.query.filter(Game.game.ilike(
         f'%{data}%')).all()
-    print(videos)
     return {'results': [vid.to_dict() for vid in videos]}

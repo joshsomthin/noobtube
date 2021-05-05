@@ -6,9 +6,14 @@ from app.models import db, Game, Tag, User, Video
 from .users import seed_users
 from .video import seed_video
 
+defaultImage = 'https://eagle-sensors.com/wp-content/uploads/unavailable-image.jpg'
+
 
 def create_game(game):
-    new_game = Game(game=game['name'], image_path=game['background_image'])
+    image = game['background_image']
+    if image is None:
+        image = defaultImage
+    new_game = Game(game=game['name'], image_path=image)
     db.session.add(new_game)
     db.session.commit()
     return new_game
