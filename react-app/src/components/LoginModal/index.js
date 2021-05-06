@@ -5,8 +5,8 @@ import LoginForm from "../auth/LoginForm";
 import Button from "@material-ui/core/Button";
 import "./LoginModal.css";
 
-const LoginModal = () => {
-  const [open, setOpen] = useState(false);
+const LoginModal = ({ status = false }) => {
+  const [open, setOpen] = useState(status);
 
   const handleOpen = () => {
     setOpen(true);

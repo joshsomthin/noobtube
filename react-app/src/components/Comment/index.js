@@ -1,10 +1,19 @@
 import React, { useState } from "react";
-import { Button, ButtonGroup } from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
+import { useDispatch } from "react-redux";
+import { Button, ButtonGroup, TextField } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import LoginModal from "../LoginModal";
 
 const Comment = () => {
   const [showButtons, setShowButtons] = useState(false);
   const [comment, setComment] = useState("");
+  const user = useSelector((state) => state.user?.user?.id);
+
+  const checkValidations = (e) => {
+    if (!user) return <LoginModal status={true} />;
+    setShowButtons(true);
+  };
+
   const handleSumbit = (e) => {
     e.preventDefault();
   };
@@ -21,7 +30,7 @@ const Comment = () => {
   return (
     <form>
       <TextField
-        onFocus={() => setShowButtons(true)}
+        onFocus={checkValidations}
         value={comment}
         onChange={updateComment}
         label="Add a public comment..."
@@ -31,7 +40,6 @@ const Comment = () => {
         <ButtonGroup>
           <Button
             type="button"
-            classes
             onClick={handleCancel}
             variant="text"
             color="primary"
