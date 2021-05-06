@@ -15,6 +15,9 @@ class User(db.Model, UserMixin):
         'Channel', back_populates='user', passive_deletes=True)
     subscriptions = db.relationship(
         'Subscription', back_populates='users', passive_deletes=True)
+    comments = db.relationship(
+        'Comment', back_populates='users', passive_deletes=True
+    )
 
     @property
     def password(self):
