@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
@@ -11,9 +12,14 @@ import SubscriptionBox from "./components/SubscriptionBox";
 import GenreVideos from "./components/GenreVideos";
 import SearchResults from "./components/SearchResults";
 import Comment from "./components/Comment";
+import Modal from "@material-ui/core/Modal";
+import { manageSignupModal, manageLoginModal } from "./store/modal";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
+  const openSignUp = useSelector((state) => state.modal.status.signup);
+  const openLogin = useSelector((state) => state.modal.status.login);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
@@ -24,10 +30,23 @@ function App() {
   if (!loaded) {
     return null;
   }
+  const handleSignUpClose = async () => {
+    return await dispatch(manageSignupModal(false));
+  };
+
+  const handleLoginClose = async () => {
+    return await dispatch(manageLoginModal());
+  };
 
   return (
     <BrowserRouter>
       <NavBar />
+      <Modal open={openSignUp} onClose={handleSignUpClose}>
+        <SignUpForm />
+      </Modal>
+      <Modal open={openLogin} onClose={handleLoginClose}>
+        <LoginForm />
+      </Modal>
       <div
         className="body-div"
         style={{ paddingTop: "70px", bottom: "0", top: "0" }}

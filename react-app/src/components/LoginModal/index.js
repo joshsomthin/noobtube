@@ -1,20 +1,16 @@
 import React from "react";
-import { useState } from "react";
-import Modal from "@material-ui/core/Modal";
-import LoginForm from "../auth/LoginForm";
+import { useDispatch } from "react-redux";
+import { manageLoginModal } from "../../store/modal";
 import Button from "@material-ui/core/Button";
 import "./LoginModal.css";
 
-const LoginModal = ({ status = false }) => {
-  const [open, setOpen] = useState(status);
+const LoginModal = () => {
+  const dispatch = useDispatch();
 
-  const handleOpen = () => {
-    setOpen(true);
+  const handleOpen = async () => {
+    return await dispatch(manageLoginModal(true));
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
   return (
     <>
       <Button
@@ -25,9 +21,6 @@ const LoginModal = ({ status = false }) => {
       >
         Login
       </Button>
-      <Modal open={open} onClose={handleClose}>
-        <LoginForm />
-      </Modal>
     </>
   );
 };
