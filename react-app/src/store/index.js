@@ -5,6 +5,7 @@ import errorsReducer from "./errors";
 import videosReducer from "./videos";
 import carouselReducer from "./carousel";
 import genresReducer from "./genres";
+import modalReducer from "./modal";
 
 const rootReducer = combineReducers({
   user: sessionReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   videos: videosReducer,
   carousels: carouselReducer,
   genres: genresReducer,
+  modal: modalReducer,
 });
 
 let enhancer;

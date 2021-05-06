@@ -18,10 +18,6 @@ const AuthCluster = () => {
   const logged = useSelector((state) => state.user.user);
   const [anchorEl, setanchorEl] = useState(null);
 
-  useEffect(() => {
-    console.log("This is line 22 in authcluster.", anchorEl);
-  }, [anchorEl]);
-
   const handleClick = (e) => {
     setanchorEl(e.currentTarget);
   };

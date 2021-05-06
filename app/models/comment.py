@@ -21,3 +21,16 @@ class Comment(db.Model):
     @property
     def get_body(self):
         return self.body
+
+    def to_timedifference(self):
+        if self.created_at:
+            time_delta = date.today() - self.created_at
+            return time_delta.days
+
+    def to_dict(self):
+        return {
+            "user": self.users.username,
+            "user_id": self.user_id,
+            "body": self.body,
+            "date": self.to_timedifference(),
+        }

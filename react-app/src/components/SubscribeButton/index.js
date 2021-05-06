@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { updateSubscribe, updateUnsubscribe } from "../../store/session";
+import { manageLoginModal, manageSignupModal } from "../../store/modal";
 import Button from "@material-ui/core/Button";
-import SignupModal from "../SignupModal";
 import "./SubscribeButton.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SubscribeButton = ({ channelId }) => {
-  const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
@@ -54,9 +53,9 @@ const SubscribeButton = ({ channelId }) => {
     },
   })(Button);
 
-  const subscribe = (e) => {
+  const subscribe = async (e) => {
     if (!user?.id) {
-      return history.push("/login");
+      return await dispatch(manageLoginModal(true));
     }
     dispatch(updateSubscribe(user.id, channelId));
   };
@@ -73,11 +72,7 @@ const SubscribeButton = ({ channelId }) => {
     <StyledSubscribeButton onClick={subscribe}>Subscribe</StyledSubscribeButton>
   );
 
-  return user?.id ? (
-    subscribed
-  ) : (
-    <SignupModal className={classes.root} text="SUBSCRIBE" />
-  );
+  return subscribed;
 };
 
 export default SubscribeButton;
