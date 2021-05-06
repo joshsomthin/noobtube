@@ -10,6 +10,7 @@ import VideoPage from "./components/VideoPage";
 import SubscriptionBox from "./components/SubscriptionBox";
 import GenreVideos from "./components/GenreVideos";
 import SearchResults from "./components/SearchResults";
+import Comment from "./components/Comment";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -58,6 +59,9 @@ function App() {
           </Route>
           <Route path="/search/:searchTerm">
             <SearchResults />
+          </Route>
+          <Route path="/testing">
+            <Comment />
           </Route>
           <Route path="/channel/:channelId/videos">{`Welcome to the channel`}</Route>
         </Switch>
