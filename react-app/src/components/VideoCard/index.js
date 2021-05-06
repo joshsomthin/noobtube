@@ -21,19 +21,17 @@ const VideoCard = ({
     if (video) await dispatch(setCurrentVideo(video));
   };
   return (
-    <div
-      onClick={updateVideo}
-      className="video-card"
-      style={{ width: "360px" }}
-    >
+    <div onClick={updateVideo} className="video-card" style={{ width: "100%" }}>
       <NavLink key={idx} to={link}>
-        <img
-          alt="video card"
-          width={width}
-          height={height}
-          style={{ objectFit: "cover" }}
-          src={image_path}
-        />
+        <div>
+          <img
+            alt="video card"
+            width={width}
+            height={height}
+            style={{ objectFit: "cover", aspectRatio: "16/9" }}
+            src={image_path}
+          />
+        </div>
         <div>{game}</div>
         {views !== null ? <div>{views} views</div> : ""}
       </NavLink>

@@ -25,3 +25,6 @@ class Game(db.Model):
             'game': self.game,
             'image_path': self.image_path
         }
+
+    def to_name(self):
+        return self.game
