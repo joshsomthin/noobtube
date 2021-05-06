@@ -6,8 +6,8 @@ class Comment(db.Model):
     __tablename__ = 'comments'
 
     id = db.Column(db.Integer, primary_key=True)
-    video_id = db.Column(db.Integer, ForeignKey(
-        'videos.id', ondelete='CASCASDE'), nullable=False)
+    video_id = db.Column(db.Integer, db.ForeignKey(
+        'videos.id', ondelete='CASCADE'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(
         'users.id', ondelete='CASCADE',),  nullable=False)
     body = db.Column(db.String(255), nullable=False)
@@ -16,7 +16,7 @@ class Comment(db.Model):
     users = db.relationship(
         'User', back_populates='comments')
     videos = db.relationship(
-        'Video', back_populates='channel')
+        'Video', back_populates='comments')
 
     @property
     def get_body(self):

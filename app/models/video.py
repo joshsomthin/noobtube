@@ -23,7 +23,7 @@ class Video(db.Model):
     channel = db.relationship(
         'Channel', back_populates='videos')
     comments = db.relationship(
-        'Comment', back_populates='videos', back_populates=True
+        'Comment', back_populates='videos', passive_deletes=True
     )
 
     def to_timedifference(self):
