@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TextField, Button, Typography, makeStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../store/session";
+import { manageLoginModal } from "../../store/modal";
 import "./LoginForm.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -25,7 +26,7 @@ const LoginForm = () => {
     e.preventDefault();
     const user = await dispatch(userLogin(email, password));
     if (!user.errors) {
-      return;
+      return await dispatch(manageLoginModal());
     } else {
       setErrors(user.errors);
     }
@@ -35,7 +36,7 @@ const LoginForm = () => {
     e.preventDefault();
     const user = await dispatch(userLogin("Demo@aa.io", "password"));
     if (!user.errors) {
-      return;
+      return await dispatch(manageLoginModal());
     } else {
       setErrors(user.errors);
     }

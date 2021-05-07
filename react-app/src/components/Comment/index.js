@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, ButtonGroup, TextField } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import LoginModal from "../LoginModal";
+import { manageLoginModal } from "../../store/modal";
 
 const Comment = () => {
+  const dispatch = useDispatch();
   const [showButtons, setShowButtons] = useState(false);
   const [comment, setComment] = useState("");
   const user = useSelector((state) => state.user?.user?.id);
 
-  const checkValidations = (e) => {
-    if (!user) return <LoginModal status={true} />;
+  const checkValidations = async (e) => {
+    if (!user) return await dispatch(manageLoginModal(true));
     setShowButtons(true);
   };
 

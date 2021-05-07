@@ -31,7 +31,7 @@ function App() {
     return null;
   }
   const handleSignUpClose = async () => {
-    return await dispatch(manageSignupModal(false));
+    return await dispatch(manageSignupModal());
   };
 
   const handleLoginClose = async () => {
