@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, ButtonGroup, TextField } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import { submitComment } from "../../store/videos";
 import { manageLoginModal } from "../../store/modal";
 
 const Comment = () => {
@@ -9,6 +10,7 @@ const Comment = () => {
   const [showButtons, setShowButtons] = useState(false);
   const [comment, setComment] = useState("");
   const user = useSelector((state) => state.user?.user?.id);
+  const videoId = useSelector((state) => state.videos.current?.id);
 
   const checkValidations = async (e) => {
     if (!user) return await dispatch(manageLoginModal(true));
@@ -17,6 +19,7 @@ const Comment = () => {
 
   const handleSumbit = (e) => {
     e.preventDefault();
+    submitComment(videoId, user, comment);
   };
 
   const updateComment = (e) => {
@@ -29,7 +32,7 @@ const Comment = () => {
   };
 
   return (
-    <form>
+    <form onSubmit={handleSumbit}>
       <TextField
         onFocus={checkValidations}
         value={comment}
@@ -52,7 +55,7 @@ const Comment = () => {
               Comment
             </Button>
           ) : (
-            <Button variant="contained" color="primary">
+            <Button type="submit" variant="contained" color="primary">
               Comment
             </Button>
           )}

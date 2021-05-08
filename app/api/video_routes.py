@@ -90,3 +90,8 @@ def search_bar():
     videos = Game.query.filter(Game.game.ilike(
         f'%{data}%')).all()
     return {'results': [vid.to_dict() for vid in videos]}
+
+
+@video_routes.route('<int:video_id>/comment', methods=['POST'])
+def post_comment(video_id):
+    data = request.json
