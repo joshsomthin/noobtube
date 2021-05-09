@@ -17,9 +17,10 @@ const Comment = () => {
     setShowButtons(true);
   };
 
-  const handleSumbit = (e) => {
+  const handleSumbit = async (e) => {
     e.preventDefault();
-    submitComment(videoId, user, comment);
+    await dispatch(submitComment(1, user, comment));
+    setComment("");
   };
 
   const updateComment = (e) => {

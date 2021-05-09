@@ -1,9 +1,10 @@
-from flask import Blueprint, jsonify, request, json
-from app.models import Video, User, Subscription, db, Video, Channel, Game
-from flask_login import login_required
-from app.youtube import search_youtube
-from app.seeds.game import search_games
+from app.forms import CommentForm
 from sqlalchemy import desc
+from app.seeds.game import search_games
+from app.youtube import search_youtube
+from flask_login import login_required
+from flask import Blueprint, jsonify, request, json
+from app.models import Video, User, Subscription, db, Video, Channel, Game, Comment
 
 
 video_routes = Blueprint('videos', __name__)
@@ -94,4 +95,16 @@ def search_bar():
 
 @video_routes.route('<int:video_id>/comment', methods=['POST'])
 def post_comment(video_id):
-    data = request.json
+    form = CommentForm()
+    print(form)
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        comment = Comment(
+            video_id=form.data['video_id'],
+            user_id=form.data['user_id'],
+            body=form.data['body']
+        )
+        db.session.add(comment)
+        db.session.commit()
+        return comment.to_dict()
+    return {'errors': form.errors}, 401

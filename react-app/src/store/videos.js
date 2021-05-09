@@ -54,11 +54,11 @@ export const submitComment = (videoId, userId, comment) => async (dispatch) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ userId, comment }),
+    body: JSON.stringify({ video_id: videoId, user_id: userId, body: comment }),
   });
   const data = await res.json();
   if (data.errors) throw data;
-  dispatch(getComments(videoId));
+  // dispatch(getComments(videoId));
 };
 
 export const searchVideoGames = (search) => async (dispatch) => {

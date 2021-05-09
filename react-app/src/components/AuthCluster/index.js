@@ -59,7 +59,7 @@ const AuthCluster = () => {
       <Button
         aria-controls="customized-menu"
         aria-haspopup="false"
-        variant="outline"
+        variant="outlined"
         color="primary"
         onClick={handleClick}
       >
