@@ -1,3 +1,8 @@
 .log {
   display: flex;
 }
+
+.icon-div {
+  cursor: pointer;
+  font-size: 30px;
+}
