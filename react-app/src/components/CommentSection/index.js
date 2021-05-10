@@ -7,7 +7,14 @@ const CommentSection = () => {
   return comments ? (
     <div>
       {comments.map((comment) => {
-        return <Comment body={comment.body} />;
+        return (
+          <Comment
+            body={comment.body}
+            user={comment.user}
+            user_id={comment.user_id}
+            date={comment.date}
+          />
+        );
       })}
     </div>
   ) : (

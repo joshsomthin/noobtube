@@ -1,0 +1,20 @@
+.comment {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 15px 0px 15px 0px;
+}
+
+.date {
+  color: rgb(170, 170, 170);
+  font-weight: 100;
+}
+
+.username {
+  font-weight: 500;
+}
+
+.account-icon {
+  font-size: 30px;
+  margin-right: 10px;
+}
