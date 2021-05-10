@@ -4,6 +4,7 @@ const LOAD_SUBS = "subscriptions/LOAD_SUBS";
 const LOAD_CHANNEL = "subscriptions/LOAD_CHANNEL";
 const UPDATE_GENRE = "videos/UPDATE_GENRE";
 const SEARCH_GAMES = "videos/SEARCH_GAMES";
+const UPDATE_COMMENTS = "videos/UPDATE_COMMENTS";
 
 const queryVideos = (videos) => ({
   type: LOAD_VIDEOS,
@@ -34,6 +35,31 @@ const searchVideos = (videos) => ({
   type: SEARCH_GAMES,
   videos,
 });
+
+const updateComments = (comments) => ({
+  type: UPDATE_COMMENTS,
+  comments,
+});
+
+export const getComments = (videoId) => async (dispatch) => {
+  const res = await fetch(`/api/videos/${videoId}/comment`);
+  const data = await res.json();
+  if (data.errors) throw data;
+  dispatch(updateComments(data.comments));
+};
+
+export const submitComment = (videoId, userId, comment) => async (dispatch) => {
+  const res = await fetch(`/api/videos/${videoId}/comment`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ video_id: videoId, user_id: userId, body: comment }),
+  });
+  const data = await res.json();
+  if (data.errors) throw data;
+  dispatch(getComments(videoId));
+};
 
 export const searchVideoGames = (search) => async (dispatch) => {
   const res = await fetch(`/api/videos/search`, {
@@ -86,6 +112,7 @@ export const loadVideos = (gameId) => async (dispatch) => {
 };
 
 export const setCurrentVideo = (video) => async (dispatch) => {
+  await dispatch(getComments(video.id));
   dispatch(currentVideo(video));
   return video;
 };
@@ -131,6 +158,10 @@ const videosReducer = (state = {}, action) => {
     case SEARCH_GAMES:
       newState = { ...state };
       newState.search = action.videos;
+      return newState;
+    case UPDATE_COMMENTS:
+      newState = { ...state };
+      newState.comments = action.comments;
       return newState;
     default:
       return state;

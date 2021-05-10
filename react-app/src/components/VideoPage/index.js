@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { increaseView } from "../../store/videos";
+import CommentForm from "../CommentForm";
 import ReactPlayer from "react-player";
 import SubsribeButton from "../SubscribeButton";
 import VidCard from "../VidCard";
@@ -70,6 +71,9 @@ const VideoPage = () => {
             ) : (
               <div>Description</div>
             )}
+          </div>
+          <div className="comment-section">
+            <CommentForm />
           </div>
         </div>
         <div className="sidebar">

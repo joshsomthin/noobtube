@@ -56,15 +56,9 @@ const AuthCluster = () => {
 
   const loggedIn = (
     <>
-      <Button
-        aria-controls="customized-menu"
-        aria-haspopup="false"
-        variant="outline"
-        color="primary"
-        onClick={handleClick}
-      >
-        <AccountCircleRoundedIcon className="button" />
-      </Button>
+      <div className="icon-div" onClick={handleClick}>
+        <AccountCircleRoundedIcon fontSize="inherit" className="button" />
+      </div>
       <StyledMenu
         id="customized-menu"
         anchorEl={anchorEl}

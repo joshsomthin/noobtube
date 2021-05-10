@@ -1,9 +1,11 @@
-from flask import Blueprint, jsonify, request, json
-from app.models import Video, User, Subscription, db, Video, Channel, Game
-from flask_login import login_required
-from app.youtube import search_youtube
-from app.seeds.game import search_games
+from app.forms import CommentForm
 from sqlalchemy import desc
+from app.seeds.game import search_games
+from app.youtube import search_youtube
+from flask_login import login_required
+from flask import Blueprint, jsonify, request, json
+from app.models import Video, User, Subscription
+from app.models import db, Video, Channel, Game, Comment
 
 
 video_routes = Blueprint('videos', __name__)
@@ -90,3 +92,23 @@ def search_bar():
     videos = Game.query.filter(Game.game.ilike(
         f'%{data}%')).all()
     return {'results': [vid.to_dict() for vid in videos]}
+
+
+@video_routes.route('<int:video_id>/comment', methods=['POST', 'GET'])
+def post_comment(video_id):
+    if request.method == 'POST':
+        form = CommentForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            comment = Comment(
+                video_id=form.data['video_id'],
+                user_id=form.data['user_id'],
+                body=form.data['body']
+            )
+            db.session.add(comment)
+            db.session.commit()
+            return comment.to_dict()
+        return {'errors': form.errors}, 401
+    if request.method == 'GET':
+        comments = Comment.query.filter(Comment.video_id == video_id).all()
+        return {'comments': [comment.to_dict() for comment in comments]}
