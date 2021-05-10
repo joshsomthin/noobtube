@@ -1,19 +1,15 @@
 [![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![LinkedIn][linkedin-shield]][linkedin-url-gabriel]
 [![LinkedIn][linkedin-shield]][linkedin-url-josh]
-[![LinkedIn][linkedin-shield]][linkedin-url-jevon]
-[![GNU License][license-shield]][license-url]
 
 <br />
 <p align="center">
-  <a href="https://cloudify-aa.herokuapp.com/">
-    <img src="favicon.png" alt="Logo" width="80" height="80">
+  <a href="https://noobtube-aa.herokuapp.com/">
+    <img src="./readme_images/noobtube_logo.png" alt="Logo" width="" height="80">
   </a>
 
-  <h3 align="center">Cloudify</h3>
+  <h3 align="center">Noobtube</h3>
 
   <p align="center">
     A music sharing platform inspired by Soundcloud
@@ -59,7 +55,7 @@
 
 ## About The Project
 
-<a href="https://cloudify-aa.herokuapp.com/">
+<a href="https://noobtube-aa.herokuapp.com/">
   <img src="https://i.gyazo.com/26167b24155ea8ed1fc79b3587542161.png" alt="Logo" >
 </a>
 
@@ -234,11 +230,9 @@ Distributed under the GNU License. See `LICENSE` for more information.
 
 ## Contact
 
-Gabriel - gharris910@icloud.com \
-
 Josh - joshua.miller2289@gmail.com
 
-Project Link: [https://cloudify-aa.herokuapp.com/](https://cloudify-aa.herokuapp.com/)
+Project Link: [https://noobtube-aa.herokuapp.com/](https://noobtube-aa.herokuapp.com/)
 
 <!-- ACKNOWLEDGEMENTS -->
 
@@ -255,16 +249,16 @@ Project Link: [https://cloudify-aa.herokuapp.com/](https://cloudify-aa.herokuapp
 [artistpage]: ./readme_images/cloudify-artistpage.PNG
 [search_results]: ./readme_images/search_results.PNG
 [playbar]: ./readme_images/cloudify-playbar.PNG
-[contributors-shield]: https://img.shields.io/github/contributors/gch910/cloudify-aa.svg?style=for-the-badge
-[contributors-url]: https://github.com/gch910/cloudify-aa/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/gch910/cloudify-aa.svg?style=for-the-badge
-[forks-url]: https://github.com/gch910/cloudify-aa/network/members
-[stars-shield]: https://img.shields.io/github/stars/gch910/cloudify-aa.svg?style=for-the-badge
-[stars-url]: https://github.com/gch910/cloudify-aa/stargazers
-[issues-shield]: https://img.shields.io/github/issues/gch910/cloudify-aa.svg?style=for-the-badge
-[issues-url]: https://github.com/gch910/cloudify-aa/issues
+[contributors-shield]: https://img.shields.io/github/contributors/joshsomthin/noobtube.svg?style=for-the-badge
+[contributors-url]: https://github.com/joshsomthin/noobtube/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/joshsomthin/noobtube?style=social
+[forks-url]: https://github.com/joshsomthin/noobtube/network/members
+[stars-shield]: https://img.shields.io/github/stars/joshsomthin/noobtube.svg?style=for-the-badge
+[stars-url]: https://github.com/joshsomthin/noobtube/stargazers
+[issues-shield]: https://img.shields.io/github/issues/joshsomthin/noobtube.svg?style=for-the-badge
+[issues-url]: https://github.com/joshsomthin/noobtube/issues
 [license-shield]: https://img.shields.io/badge/License-GPL%20v3-blue.svg
-[license-url]: https://github.com/gch910/cloudify-aa/blob/main/LICENSE
+[license-url]: https://github.com/joshsomthin/noobtube/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url-gabriel]: https://www.linkedin.com/in/gabriel-harris-249231208/
 [linkedin-url-josh]: https://www.linkedin.com/in/joshua-miller-625685154/
