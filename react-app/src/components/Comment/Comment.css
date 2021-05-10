@@ -1,7 +1,7 @@
 .comment {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  max-width: 100%;
   margin: 15px 0px 15px 0px;
 }
 
@@ -17,4 +17,14 @@
 .account-icon {
   font-size: 30px;
   margin-right: 10px;
+}
+
+.body {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.text {
+  width: 100%;
 }
