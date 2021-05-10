@@ -188,11 +188,11 @@ When a user enters something into the searchbar, a fetch request is sent to the 
 
 ![search_results]
 
-### Playbar
+### Subscriptions
 
-The music player is built with wavesurfer.js, the package handles loading music and controls related to playing the music. The music is loaded through redux state and the playing/pause buttons are also tied to the redux state so play buttons throughout the website can also manage currently played songs and play/pause status.
+As a logged in user, you are able to subscribe to channels. When you subscribe to a channel, the database will return all the videos that user has uploaded and been viewed/placed in the database and return them to the user in their subscription box. As it works right now, a video isn't registered into the database until a user visits the video. In the future it will be implemented to seed a variety of new videos by the channel, so users will be able to view new videos by the creator in addition to already seeded ones that have been viewed.
 
-![playbar]
+![subscriptions]
 
 <!-- ROADMAP -->
 
@@ -239,7 +239,7 @@ Project Link: [https://noobtube-aa.herokuapp.com/](https://noobtube-aa.herokuapp
 [homepage]: https://i.gyazo.com/c17df3315c9dcb13538cb015d873ca1f.jpg
 [videopage]: https://i.gyazo.com/cf506e54be513181c2a8d37137e3d06a.jpg
 [search_results]: https://i.gyazo.com/0b1751ad8ce602ce56501ceed9a0ae05.jpg
-[playbar]: ./readme_images/Noobtube-playbar.PNG
+[subscriptions]: https://i.gyazo.com/1c22fb497d9dd03e279a80e314de2395.jpg
 [contributors-shield]: https://img.shields.io/github/contributors/joshsomthin/noobtube.svg?style=for-the-badge
 [contributors-url]: https://github.com/joshsomthin/noobtube/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/joshsomthin/noobtube?style=social
@@ -251,7 +251,5 @@ Project Link: [https://noobtube-aa.herokuapp.com/](https://noobtube-aa.herokuapp
 [license-shield]: https://img.shields.io/badge/License-GPL%20v3-blue.svg
 [license-url]: https://github.com/joshsomthin/noobtube/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url-gabriel]: https://www.linkedin.com/in/gabriel-harris-249231208/
 [linkedin-url-josh]: https://www.linkedin.com/in/joshua-miller-625685154/
-[linkedin-url-jevon]: https://www.linkedin.com/in/jevon-timmons/
 [product-screenshot]: images/screenshot.png
