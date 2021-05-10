@@ -42,14 +42,14 @@ const updateComments = (comments) => ({
 });
 
 export const getComments = (videoId) => async (dispatch) => {
-  const res = await fetch(`api/videos/${videoId}/comment`);
+  const res = await fetch(`/api/videos/${videoId}/comment`);
   const data = await res.json();
   if (data.errors) throw data;
   dispatch(updateComments(data.comments));
 };
 
 export const submitComment = (videoId, userId, comment) => async (dispatch) => {
-  const res = await fetch(`api/videos/${videoId}/comment`, {
+  const res = await fetch(`/api/videos/${videoId}/comment`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -112,6 +112,7 @@ export const loadVideos = (gameId) => async (dispatch) => {
 };
 
 export const setCurrentVideo = (video) => async (dispatch) => {
+  await dispatch(getComments(video.id));
   dispatch(currentVideo(video));
   return video;
 };

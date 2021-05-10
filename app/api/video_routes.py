@@ -94,23 +94,21 @@ def search_bar():
     return {'results': [vid.to_dict() for vid in videos]}
 
 
-@video_routes.route('<int:video_id>/comment', methods=['POST'])
+@video_routes.route('<int:video_id>/comment', methods=['POST', 'GET'])
 def post_comment(video_id):
-    form = CommentForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        comment = Comment(
-            video_id=form.data['video_id'],
-            user_id=form.data['user_id'],
-            body=form.data['body']
-        )
-        db.session.add(comment)
-        db.session.commit()
-        return comment.to_dict()
-    return {'errors': form.errors}, 401
-
-
-@video_routes.route('<int:video_id>/comment', methods=['GET'])
-def get_comments(video_id):
-    comments = Comment.query.filter(Comment.video_id == video_id).all()
-    return {'comments': [comment.to_dict() for comment in comments]}
+    if request.method == 'POST':
+        form = CommentForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            comment = Comment(
+                video_id=form.data['video_id'],
+                user_id=form.data['user_id'],
+                body=form.data['body']
+            )
+            db.session.add(comment)
+            db.session.commit()
+            return comment.to_dict()
+        return {'errors': form.errors}, 401
+    if request.method == 'GET':
+        comments = Comment.query.filter(Comment.video_id == video_id).all()
+        return {'comments': [comment.to_dict() for comment in comments]}

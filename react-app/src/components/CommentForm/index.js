@@ -20,7 +20,7 @@ const CommentForm = () => {
 
   const handleSumbit = async (e) => {
     e.preventDefault();
-    await dispatch(submitComment(1, user, comment));
+    await dispatch(submitComment(videoId, user, comment));
     setComment("");
   };
 
@@ -38,6 +38,7 @@ const CommentForm = () => {
       <form onSubmit={handleSumbit}>
         <TextField
           onFocus={checkValidations}
+          fullWidth
           value={comment}
           onChange={updateComment}
           label="Add a public comment..."
