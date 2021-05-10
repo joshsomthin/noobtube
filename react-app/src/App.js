@@ -11,7 +11,7 @@ import VideoPage from "./components/VideoPage";
 import SubscriptionBox from "./components/SubscriptionBox";
 import GenreVideos from "./components/GenreVideos";
 import SearchResults from "./components/SearchResults";
-import Comment from "./components/Comment";
+import CommentForm from "./components/CommentForm";
 import Modal from "@material-ui/core/Modal";
 import { manageSignupModal, manageLoginModal } from "./store/modal";
 
@@ -80,7 +80,7 @@ function App() {
             <SearchResults />
           </Route>
           <Route path="/testing">
-            <Comment />
+            <CommentForm />
           </Route>
           <Route path="/channel/:channelId/videos">{`Welcome to the channel`}</Route>
         </Switch>

@@ -4,7 +4,8 @@ from app.seeds.game import search_games
 from app.youtube import search_youtube
 from flask_login import login_required
 from flask import Blueprint, jsonify, request, json
-from app.models import Video, User, Subscription, db, Video, Channel, Game, Comment
+from app.models import Video, User, Subscription
+from app.models import db, Video, Channel, Game, Comment
 
 
 video_routes = Blueprint('videos', __name__)
@@ -96,7 +97,6 @@ def search_bar():
 @video_routes.route('<int:video_id>/comment', methods=['POST'])
 def post_comment(video_id):
     form = CommentForm()
-    print(form)
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         comment = Comment(
@@ -108,3 +108,9 @@ def post_comment(video_id):
         db.session.commit()
         return comment.to_dict()
     return {'errors': form.errors}, 401
+
+
+@video_routes.route('<int:video_id>/comment', methods=['GET'])
+def get_comments(video_id):
+    comments = Comment.query.filter(Comment.video_id == video_id).all()
+    return {'comments': [comment.to_dict() for comment in comments]}
