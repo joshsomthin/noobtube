@@ -12,16 +12,16 @@
   <h3 align="center">Noobtube</h3>
 
   <p align="center">
-    A music sharing platform inspired by Soundcloud
+    A video platform for gamers
     <br />
-    <a href="https://github.com/gch910/cloudify-aa"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/joshsomthin/noobtube"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/gch910/cloudify-aa">View Demo</a>
+    <a href="https://github.com/joshsomthin/noobtube">View Demo</a>
     ·
-    <a href="https://github.com/gch910/cloudify-aa/issues">Report a Bug</a>
+    <a href="https://github.com/joshsomthin/noobtube/issues">Report a Bug</a>
     ·
-    <a href="https://github.com/gch910/cloudify-aa/issues">Request Feature</a>
+    <a href="https://github.com/joshsomthin/noobtube/issues">Request Feature</a>
   </p>
 </p>
 
@@ -56,32 +56,30 @@
 ## About The Project
 
 <a href="https://noobtube-aa.herokuapp.com/">
-  <img src="https://i.gyazo.com/26167b24155ea8ed1fc79b3587542161.png" alt="Logo" >
+  <img src="https://i.gyazo.com/86bdd0ba31ff005f3423c8912ae670dc.jpg" alt="Logo" >
 </a>
 
 ## Summary
 
-Cloudify is a web application inspired by SoundCloud built using Python / Flask utilizing React.js/Redux architecture. Cloudify allows users to:
+Noobtube is a web application inspired by YouTube built using Python / Flask utilizing React.js/Redux architecture. Noobtube allows users to:
 
 - Create an account / profile
 - Log in / Log out
-- Upload / share music
-- Listen to music
-- View artist profiles
-- Search for artists / music
-- View song pages and comment on songs
-- Add a like to a song
+- Watch videos
+- Subscribe to channels
+- Comment on videos
+- Search for videos of video games
 
 ### Built With
 
-- Javascript
-- React
-- Redux
-- Python
-- Flask
-- SQLAlchemy
-- PostgreSQL
-- CSS
+- [Javascript](https://www.javascript.com/)
+- [React](https://reactjs.org/)
+- [Redux](https://redux.js.org/)
+- [Python](https://www.python.org/)
+- [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+- [SQLAlchemy](https://www.sqlalchemy.org/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 - [react-responsive-carousel](https://www.npmjs.com/package/react-responsive-carousel)
 
 ## Overall Structure
@@ -121,7 +119,7 @@ Installations
 1. Clone the repository
 
    ```sh
-   git clone https://github.com/gch910/cloudify-aa.git
+   git clone https://github.com/joshsomthin/noobtube.git
 
    ```
 
@@ -166,37 +164,31 @@ Installations
 
 ## Primary Components
 
-#### User Authorization
+### User Authorization
 
 User authentication is handled in Flask using the flask_login package. The werkzeug.security package is used for password hashing. Passwords are not saved to the database, only password hashes. When users log in, the password they provide is rehashed and checked against the original encrypted password hash to verify credentials.
 
 ![signin]
 
-#### Home Page
+### Home Page
 
-The Cloudify homepage features sliding carousels of songs sorted by genre. These carousels dynamically update to include music that has been recently uploaded to the platform. All album images are active links that immediately play the song when clicked and take you to that artist's user page.
+The Noobtube homepage features sliding carousels of games sorted by genre. These carousels include the top games for each genre. All game links will create a request to a YouTube API to fill results from that game.
 
 ![homepage]
 
-#### Song Page
+### Video Page
 
-On navigation to the song page, if the specified song is not already present in the redux store, a fetch request will be made to the backend which will respond with queried results of relevent song information. This information, such as the song's artist, artist image, album art, genre, comments and likes will be rendered extremely quickly thanks to React's virtual DOM. A logged in user can interact with the song page by liking it, unliking it, adding/deleting comments and of course playing/pausing the song, with page updates happening instantly. All of the updated song data is saved to the postgreSQL database where it can be retreived later on.
+On navigation to the video page, if the specified video is not already present in the database, a fetch request will be made to the backend which will add it to the database for future queries. This information, such as the video's channel, user, and comments will be rendered extremely quickly thanks to React's virtual DOM. A logged in user can interact with the video page by commenting on it, subscribing to it, adding/deleting comments and of course playing/pausing the video, with page updates happening instantly, the view count increments at the end of a video being watched. All of the updated video data is saved to the postgreSQL database where it can be retreived later on.
 
-![songpage]
+![videopage]
 
-#### Artist Page
+### Search Results
 
-Artist / User pages (they are synonymous in this app) function similarly to song pages. The data is handled the same way, but the primary focus of this page is rendering all of the songs uploaded by this user. Album art and realease date are included for each song as well as a play button that updates the state of the global playbar when clicked. The clicked song will become the new "playing" song and the playbar, which persists music playback and information through re-renders, will update to reflect the current audio. The navigation bar utilizes React state to create seemless filtering of songs based on the active link. A logged in user may click on their profile picture (a default is provided on signup) to upload a new profile image.
-
-![songpage]
-
-#### Search Results
-
-When a user enters something into the searchbar, a fetch request is sent to the backend where the data intensive task of querying for matching results is handled. The backend responds with results for matching songs and artists, which is then rendered on the search results page with the appropriate images/navigation links.
+When a user enters something into the searchbar, a fetch request is sent to the backend where it makes two requests. The first request is to the RAWG API to see if there are any video games in their database that match the query. The second is sent to the postgreql database and then the two are compared and matched. If there are duplicate entries they are removed, and all the new entries are now saved in the database for future queries. The backend responds with results for matching video games, which is then rendered on the search results page with the appropriate images/navigation links.
 
 ![search_results]
 
-#### Playbar
+### Playbar
 
 The music player is built with wavesurfer.js, the package handles loading music and controls related to playing the music. The music is loaded through redux state and the playing/pause buttons are also tied to the redux state so play buttons throughout the website can also manage currently played songs and play/pause status.
 
@@ -206,7 +198,7 @@ The music player is built with wavesurfer.js, the package handles loading music 
 
 ## Roadmap
 
-See the [open issues](https://github.com/gch910/cloudify-aa/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/joshsomthin/noobtube/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 
@@ -243,12 +235,11 @@ Project Link: [https://noobtube-aa.herokuapp.com/](https://noobtube-aa.herokuapp
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[signin]: ./readme_images/cloudify-login.PNG
-[homepage]: ./readme_images/cloudify-homepage.PNG
-[songpage]: ./readme_images/cloudify-songpage.PNG
-[artistpage]: ./readme_images/cloudify-artistpage.PNG
-[search_results]: ./readme_images/search_results.PNG
-[playbar]: ./readme_images/cloudify-playbar.PNG
+[signin]: https://i.gyazo.com/c0c79e2a0be40e1929fc9eb07e2cd1aa.jpg
+[homepage]: https://i.gyazo.com/c17df3315c9dcb13538cb015d873ca1f.jpg
+[videopage]: https://i.gyazo.com/cf506e54be513181c2a8d37137e3d06a.jpg
+[search_results]: https://i.gyazo.com/0b1751ad8ce602ce56501ceed9a0ae05.jpg
+[playbar]: ./readme_images/Noobtube-playbar.PNG
 [contributors-shield]: https://img.shields.io/github/contributors/joshsomthin/noobtube.svg?style=for-the-badge
 [contributors-url]: https://github.com/joshsomthin/noobtube/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/joshsomthin/noobtube?style=social
