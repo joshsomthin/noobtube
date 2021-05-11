@@ -57,6 +57,7 @@ export const deleteComment = (commentId, videoId) => async (dispatch) => {
   });
   const data = await res.json();
   if (data.errors) throw data;
+  console.log(videoId);
   dispatch(getComments(videoId));
 };
 

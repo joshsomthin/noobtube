@@ -6,22 +6,16 @@ import { deleteComment } from "../../store/videos";
 import { ButtonGroup } from "@material-ui/core";
 import "./Comment.css";
 
-const Comment = ({ id, body, user, user_id, date }) => {
+const Comment = ({ video_id, id, body, user, user_id, date }) => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state?.user?.user?.id);
 
   const openEdit = () => {};
 
   const removeComment = async () => {
-    await dispatch(deleteComment(id));
+    await dispatch(deleteComment(id, video_id));
   };
 
-  const editDeleteButtons = (
-    <ButtonGroup>
-      <button onClick={openEdit}>Edit</button>
-      <button onClick={removeComment}>Delete</button>
-    </ButtonGroup>
-  );
   return (
     <div className="comment">
       <div className="account-icon">
@@ -41,7 +35,14 @@ const Comment = ({ id, body, user, user_id, date }) => {
         </div>
         <div className="body">
           <span>{body}</span>
-          {loggedInUser === user_id ? editDeleteButtons : ""}
+          {loggedInUser === user_id ? (
+            <ButtonGroup>
+              <button onClick={openEdit}>Edit</button>
+              <button onClick={removeComment}>Delete</button>
+            </ButtonGroup>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>
