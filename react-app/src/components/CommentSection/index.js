@@ -9,6 +9,7 @@ const CommentSection = () => {
       {comments.map((comment) => {
         return (
           <Comment
+            id={comment.id}
             body={comment.body}
             user={comment.user}
             user_id={comment.user_id}

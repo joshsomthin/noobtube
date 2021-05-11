@@ -112,3 +112,11 @@ def post_comment(video_id):
     if request.method == 'GET':
         comments = Comment.query.filter(Comment.video_id == video_id).all()
         return {'comments': [comment.to_dict() for comment in comments]}
+
+
+@video_routes.route('comment/<int:comment_id>', methods=['DELETE'])
+def delete_comment(comment_id):
+    comment = Comment.query.get(comment_id)
+    db.session.delete(comment)
+    db.session.commit()
+    return {'deleted': comment_id}

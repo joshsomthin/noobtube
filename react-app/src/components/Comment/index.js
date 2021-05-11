@@ -1,19 +1,27 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import AccountCircleRoundedIcon from "@material-ui/icons/AccountCircleRounded";
-import "./Comment.css";
+import { deleteComment } from "../../store/videos";
 import { ButtonGroup } from "@material-ui/core";
+import "./Comment.css";
 
-const editDeleteButtons = (
-  <ButtonGroup>
-    <button>Edit</button>
-    <button>Delete</button>
-  </ButtonGroup>
-);
-
-const Comment = ({ body, user, user_id, date }) => {
+const Comment = ({ id, body, user, user_id, date }) => {
+  const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state?.user?.user?.id);
+
+  const openEdit = () => {};
+
+  const removeComment = async () => {
+    await dispatch(deleteComment(id));
+  };
+
+  const editDeleteButtons = (
+    <ButtonGroup>
+      <button onClick={openEdit}>Edit</button>
+      <button onClick={removeComment}>Delete</button>
+    </ButtonGroup>
+  );
   return (
     <div className="comment">
       <div className="account-icon">

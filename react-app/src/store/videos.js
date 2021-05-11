@@ -48,6 +48,18 @@ export const getComments = (videoId) => async (dispatch) => {
   dispatch(updateComments(data.comments));
 };
 
+export const deleteComment = (commentId, videoId) => async (dispatch) => {
+  const res = await fetch(`/api/videos/comment/${commentId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await res.json();
+  if (data.errors) throw data;
+  dispatch(getComments(videoId));
+};
+
 export const submitComment = (videoId, userId, comment) => async (dispatch) => {
   const res = await fetch(`/api/videos/${videoId}/comment`, {
     method: "POST",
