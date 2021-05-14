@@ -110,7 +110,8 @@ def post_comment(video_id):
             return comment.to_dict()
         return {'errors': form.errors}, 401
     if request.method == 'GET':
-        comments = Comment.query.filter(Comment.video_id == video_id).all()
+        comments = Comment.query.order_by(Comment.id.desc()).filter(
+            Comment.video_id == video_id).all()
         return {'comments': [comment.to_dict() for comment in comments]}
 
 
@@ -120,3 +121,12 @@ def delete_comment(comment_id):
     db.session.delete(comment)
     db.session.commit()
     return {'deleted': comment_id}
+
+
+@video_routes.route('comment/<int:comment_id>', methods=['PATCH'])
+def edit_comment(comment_id):
+    print(request.json)
+    comment = Comment.query.get(comment_id)
+    comment.body = request.json['body']
+    db.session.commit()
+    return {'updated': comment.to_dict()}

@@ -1,20 +1,28 @@
-import React from "react";
+import React, { useState, useEffect, createRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import AccountCircleRoundedIcon from "@material-ui/icons/AccountCircleRounded";
 import { deleteComment } from "../../store/videos";
 import { ButtonGroup } from "@material-ui/core";
+import EditComment from "../EditComment";
+import { commentStatus } from "../../store/videos";
 import "./Comment.css";
 
 const Comment = ({ video_id, id, body, user, user_id, date }) => {
   const dispatch = useDispatch();
+  const editComment = useSelector((state) => state.videos?.commentStatus);
   const loggedInUser = useSelector((state) => state?.user?.user?.id);
-
-  const openEdit = () => {};
+  const openEdit = async () => {
+    await dispatch(commentStatus(id));
+  };
 
   const removeComment = async () => {
     await dispatch(deleteComment(id, video_id));
   };
+
+  useEffect(() => {
+    commentStatus(false);
+  }, []);
 
   return (
     <div className="comment">
@@ -34,8 +42,12 @@ const Comment = ({ video_id, id, body, user, user_id, date }) => {
           </span>
         </div>
         <div className="body">
-          <span>{body}</span>
-          {loggedInUser === user_id ? (
+          {editComment === id ? (
+            <EditComment body={body} id={id} video_id={video_id} />
+          ) : (
+            <span>{body}</span>
+          )}
+          {loggedInUser === user_id && !editComment ? (
             <ButtonGroup>
               <button onClick={openEdit}>Edit</button>
               <button onClick={removeComment}>Delete</button>
