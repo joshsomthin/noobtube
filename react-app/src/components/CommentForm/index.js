@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { submitComment } from "../../store/videos";
 import { manageLoginModal } from "../../store/modal";
 import CommentSection from "../CommentSection";
+import "./CommentForm.css";
 
 const CommentForm = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const CommentForm = () => {
   const [comment, setComment] = useState("");
   const user = useSelector((state) => state.user?.user?.id);
   const videoId = useSelector((state) => state.videos.current?.id);
+  const comments = useSelector((state) => state.videos?.comments);
 
   const checkValidations = async (e) => {
     if (!user) return await dispatch(manageLoginModal(true));
@@ -35,6 +37,9 @@ const CommentForm = () => {
 
   return (
     <>
+      <div className="comment-section">
+        {comments ? comments?.length : 0} Comments
+      </div>
       <form onSubmit={handleSumbit}>
         <TextField
           onFocus={checkValidations}

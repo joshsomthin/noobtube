@@ -72,9 +72,7 @@ const VideoPage = () => {
               <div>Description</div>
             )}
           </div>
-          <div className="comment-section">
-            <CommentForm />
-          </div>
+          <CommentForm />
         </div>
         <div className="sidebar">
           <h2>Related Videos</h2>

@@ -29,7 +29,9 @@ class Comment(db.Model):
 
     def to_dict(self):
         return {
+            "id": self.id,
             "user": self.users.username,
+            "video_id": self.video_id,
             "user_id": self.user_id,
             "body": self.body,
             "date": self.to_timedifference(),

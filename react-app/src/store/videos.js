@@ -5,6 +5,7 @@ const LOAD_CHANNEL = "subscriptions/LOAD_CHANNEL";
 const UPDATE_GENRE = "videos/UPDATE_GENRE";
 const SEARCH_GAMES = "videos/SEARCH_GAMES";
 const UPDATE_COMMENTS = "videos/UPDATE_COMMENTS";
+const COMMENT_STATUS = "videos/COMMENT_STATUS";
 
 const queryVideos = (videos) => ({
   type: LOAD_VIDEOS,
@@ -41,11 +42,47 @@ const updateComments = (comments) => ({
   comments,
 });
 
+const closeOpenComment = (id) => ({
+  type: COMMENT_STATUS,
+  id,
+});
+
+export const commentStatus = (id) => (dispatch) => {
+  dispatch(closeOpenComment(id));
+};
+
 export const getComments = (videoId) => async (dispatch) => {
   const res = await fetch(`/api/videos/${videoId}/comment`);
   const data = await res.json();
   if (data.errors) throw data;
   dispatch(updateComments(data.comments));
+};
+
+export const submitEditComment =
+  (commentId, body, videoId) => async (dispatch) => {
+    const res = await fetch(`/api/videos/comment/${commentId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ body }),
+    });
+    const data = await res.json();
+    if (data.errors) throw data;
+    dispatch(getComments(videoId));
+    dispatch(commentStatus(null));
+  };
+
+export const deleteComment = (commentId, videoId) => async (dispatch) => {
+  const res = await fetch(`/api/videos/comment/${commentId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await res.json();
+  if (data.errors) throw data;
+  dispatch(getComments(videoId));
 };
 
 export const submitComment = (videoId, userId, comment) => async (dispatch) => {
@@ -162,6 +199,10 @@ const videosReducer = (state = {}, action) => {
     case UPDATE_COMMENTS:
       newState = { ...state };
       newState.comments = action.comments;
+      return newState;
+    case COMMENT_STATUS:
+      newState = { ...state };
+      newState.commentStatus = action.id;
       return newState;
     default:
       return state;
