@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import AccountCircleRoundedIcon from "@material-ui/icons/AccountCircleRounded";
 import { deleteComment } from "../../store/videos";
-import { ButtonGroup } from "@material-ui/core";
+import { ButtonGroup, Button } from "@material-ui/core";
 import EditComment from "../EditComment";
 import { commentStatus } from "../../store/videos";
 import "./Comment.css";
@@ -49,8 +49,12 @@ const Comment = ({ video_id, id, body, user, user_id, date }) => {
           )}
           {loggedInUser === user_id && !editComment ? (
             <ButtonGroup>
-              <button onClick={openEdit}>Edit</button>
-              <button onClick={removeComment}>Delete</button>
+              <Button variant="text" onClick={openEdit}>
+                Edit
+              </Button>
+              <Button variant="text" onClick={removeComment}>
+                Delete
+              </Button>
             </ButtonGroup>
           ) : (
             ""
